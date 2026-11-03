@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HUB 3DS·B — Repaso del año</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f8fafc;
+      --card: #ffffff;
+      --text: #0f172a;
+      --muted: #475569;
+      --primary: #1e293b;
+      --accent: #22c55e;
+      --border: #e2e8f0;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    h1, h2, h3 { font-family: 'Poppins', sans-serif; line-height: 1.2; }
+    header {
+      background: var(--primary);
+      color: white;
+      padding: 2rem 1rem;
+      text-align: center;
+    }
+    header h1 { font-size: 2rem; margin-bottom: .25rem; }
+    header p { color: #cbd5e1; font-size: .95rem; }
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 1rem;
+      flex-wrap: wrap;
+    }
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-size: .9rem;
+      padding: .4rem .9rem;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.1);
+    }
+    nav a:hover { background: var(--accent); color: var(--primary); }
+    main { max-width: 1100px; margin: 0 auto; padding: 2rem 1rem; }
+    section { margin-bottom: 3rem; }
+    section h2 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      border-left: 4px solid var(--accent);
+      padding-left: .75rem;
+    }
+    .intro { color: var(--muted); margin-bottom: 1.5rem; }
+
+    /* Buscador */
+    .search-box {
+      display: flex;
+      gap: .5rem;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+    }
+    .search-box input {
+      flex: 1;
+      min-width: 220px;
+      padding: .7rem 1rem;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: 1rem;
+    }
+    .search-box button {
+      padding: .7rem 1.2rem;
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+    .search-box button:hover { background: var(--accent); color: var(--primary); }
+
+    /* Grid de módulos */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.25rem;
+    }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      transition: transform .15s, box-shadow .15s;
+    }
+    .card:hover { transform: translateY(-4px); box-shadow: 0 8px 20px rgba(0,0,0,.08); }
+    .card .tag {
+      display: inline-block;
+      font-size: .7rem;
+      font-weight: 600;
+      padding: .15rem .6rem;
+      border-radius: 999px;
+      background: #dcfce7;
+      color: #166534;
+      margin-bottom: .5rem;
+      width: fit-content;
+    }
+    .card h3 { font-size: 1.05rem; margin-bottom: .4rem; }
+    .card p { font-size: .9rem; color: var(--muted); margin-bottom: .6rem; }
+    .card .tools {
+      font-size: .8rem;
+      color: var(--primary);
+      background: var(--bg);
+      border-radius: 6px;
+      padding: .5rem .6rem;
+      margin-top: auto;
+    }
+    .card .tools strong { display: block; margin-bottom: .2rem; }
+
+    /* Equipo y roles */
+    .team {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 1rem;
+    }
+    .team .member {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1rem;
+    }
+    .team .member strong { display: block; margin-bottom: .25rem; }
+    .team .member span { font-size: .85rem; color: var(--muted); }
+
+    footer {
+      text-align: center;
+      padding: 1.5rem;
+      font-size: .85rem;
+      color: var(--muted);
+      border-top: 1px solid var(--border);
+    }
+
+    @media (max-width: 600px) {
+      header h1 { font-size: 1.5rem; }
+      section h2 { font-size: 1.25rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>HUB 3DS·B</h1>
+    <p>Portal de repaso · 3.º Bachillerato Técnico Vocacional en Desarrollo de Software «B» · INDEL</p>
+    <nav>
+      <a href="#modulos">Módulos</a>
+      <a href="#equipo">Equipo</a>
+      <a href="#acuerdos">Acuerdos GitHub</a>
+      <a href="#bitacora">Bitácora</a>
+    </nav>
+  </header>
+
+  <main>
+
+    <section id="modulos">
+      <h2>Mapa del año</h2>
+      <p class="intro">Lista de módulos cursados con el profesor Javier Mineros y el profesor Arcides Canales. Buscá por nombre, profesor o herramienta.</p>
+
+      <div class="search-box">
+        <input type="text" id="search" placeholder="Buscar módulo, profesor o herramienta..." />
+        <button type="button" onclick="filtrar()">Buscar</button>
+      </div>
+
+      <div class="grid" id="listaModulos"></div>
+    </section>
+
+    <section id="equipo">
+      <h2>Equipo y roles</h2>
+      <p class="intro">Cada integrante es dueño de sus módulos y sus commits llevan su nombre.</p>
+      <div class="team">
+        <div class="member"><strong>Integrante 1</strong><span>Líder Git · Módulos 3.1 y 3.2</span></div>
+        <div class="member"><strong>Integrante 2</strong><span>Diseñador UI · Módulos 3.3 y 3.4</span></div>
+        <div class="member"><strong>Integrante 3</strong><span>Curador de contenido · Módulos 3.8 y 4</span></div>
+        <div class="member"><strong>Integrante 4</strong><span>QA y accesibilidad · Módulos 2 y 3</span></div>
+      </div>
+    </section>
+
+    <section id="acuerdos">
+      <h2>Acuerdos de trabajo en GitHub</h2>
+      <ul style="color:var(--muted); padding-left:1.25rem;">
+        <li>Commits con formato <code>tipo: descripción</code> (ej. <code>feat: agregar ficha módulo 3.1</code>).</li>
+        <li>Antes de subir: <code>git pull</code> para evitar conflictos.</li>
+        <li>Nunca se suben contraseñas, claves, tokens ni datos personales.</li>
+        <li>El repositorio es público: todo lo que suban lo puede ver cualquiera.</li>
+      </ul>
+    </section>
+
+    <section id="bitacora">
+      <h2>Bitácora del Día 1</h2>
+      <p class="intro">Cada integrante escribe su bitácora en un archivo propio (con su nombre).</p>
+      <ul style="color:var(--muted); padding-left:1.25rem;">
+        <li>Hoy aprendí o recordé…</li>
+        <li>Lo que me costó…</li>
+        <li>Cómo lo resolví (incluyendo qué le pregunté a la IA)…</li>
+        <li>Mañana voy a…</li>
+      </ul>
+    </section>
+
+  </main>
+
+  <footer>
+    HUB 3DS·B · Repaso integral del año · Guía del profesor Javier Arturo García Mineros · INDEL
+  </footer>
+
+  <script>
+    // ==== DATOS DE LOS MÓDULOS ====
+    const modulos = [
+      {
+        nombre: "BTVDS 3.1 — Desarrollo de aplicaciones de software para la solución de problemas",
+        profesor: "Arcides Canales",
+        resumen: "Desarrollo de aplicaciones para resolver problemas reales usando Visual Studio, Windows Forms, .NET MAUI, ASPX y PrestaShop.",
+        herramientas: ["Visual Studio", "Windows Forms", ".NET MAUI", "ASPX", "PrestaShop"]
+      },
+      {
+        nombre: "Módulo 2 — Desarrollo de componentes para dispositivos móviles",
+        profesor: "Arcides Canales",
+        resumen: "Creación de componentes y apps móviles, integrando interfaces y lógica para dispositivos.",
+        herramientas: ["Visual Studio", ".NET MAUI", "Windows Forms"]
+      },
+      {
+        nombre: "Módulo 3 — Conversación de inglés sobre mantenimiento de sistemas informáticos",
+        profesor: "Arcides Canales",
+        resumen: "Práctica de conversación en inglés técnico aplicada al mantenimiento de sistemas informáticos.",
+        herramientas: ["Inglés técnico", "Vocabulario de mantenimiento", "Role-play"]
+      },
+      {
+        nombre: "Módulo 4 — Puesta en marcha de la empresa en asociatividad cooperativa",
+        profesor: "Arcides Canales",
+        resumen: "Emprendimiento y constitución de una empresa bajo modelo cooperativo: plan, organización y puesta en marcha.",
+        herramientas: ["Plan de negocio", "Documentos cooperativos", "Presentaciones"]
+      },
+      {
+        nombre: "Módulo 3.8 — Proyecto innovador de Desarrollo de Software",
+        profesor: "Javier Mineros",
+        resumen: "Diseño y desarrollo de un proyecto innovador de software aplicando todo lo aprendido en el año.",
+        herramientas: ["Visual Studio Code", "Python", "PHP", "IA"]
+      },
+      {
+        nombre: "Módulo 3.4 — Elaboración de documentación de Sistemas informáticos",
+        profesor: "Javier Mineros",
+        resumen: "Documentación técnica de sistemas: manuales, diagramas, especificaciones y estándares.",
+        herramientas: ["Visual Studio Code", "Markdown", "IA"]
+      },
+      {
+        nombre: "Módulo 3.3 — Administración de Bases de Datos",
+        profesor: "Javier Mineros",
+        resumen: "Diseño, creación y administración de bases de datos relacionales con XAMPP y PHP.",
+        herramientas: ["XAMPP", "MySQL", "PHP", "phpMyAdmin"]
+      },
+      {
+        nombre: "Módulo 3.2 — Mantenimiento y aseguramiento de la operación del sistema informático",
+        profesor: "Javier Mineros",
+        resumen: "Mantenimiento preventivo y correctivo, respaldo y aseguramiento de la operación de sistemas.",
+        herramientas: ["Avalonia", "Python", "XAMPP", "Visual Studio Code"]
+      }
+    ];
+
+    const lista = document.getElementById("listaModulos");
+    const input = document.getElementById("search");
+
+    function renderizar(listaModulos) {
+      lista.innerHTML = "";
+      if (listaModulos.length === 0) {
+        lista.innerHTML = "<p style='color:var(--muted)'>No se encontraron módulos.</p>";
+        return;
+      }
+      listaModulos.forEach(m => {
+        const card = document.createElement("article");
+        card.className = "card";
+        card.innerHTML = `
+          <span class="tag">${m.profesor}</span>
+          <h3>${m.nombre}</h3>
+          <p>${m.resumen}</p>
+          <div class="tools">
+            <strong>Herramientas:</strong>
+            ${m.herramientas.join(" · ")}
+          </div>
+        `;
+        lista.appendChild(card);
+      });
+    }
+
+    function filtrar() {
+      const q = input.value.toLowerCase().trim();
+      const filtrados = modulos.filter(m =>
+        m.nombre.toLowerCase().includes(q) ||
+        m.profesor.toLowerCase().includes(q) ||
+        m.resumen.toLowerCase().includes(q) ||
+        m.herramientas.join(" ").toLowerCase().includes(q)
+      );
+      renderizar(filtrados);
+    }
+
+    input.addEventListener("input", filtrar);
+    renderizar(modulos);
+  </script>
+</body>
+</html>
