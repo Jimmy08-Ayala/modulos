@@ -6,150 +6,274 @@
   <title>HUB 3DS·B — Repaso del año</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #f8fafc;
-      --card: #ffffff;
-      --text: #0f172a;
-      --muted: #475569;
-      --primary: #1e293b;
-      --accent: #22c55e;
-      --border: #e2e8f0;
+      --bg: #050811;
+      --card: rgba(15, 23, 42, 0.75);
+      --text: #e2e8f0;
+      --muted: #94a3b8;
+      --accent: #00f3ff;
+      --accent-glow: rgba(0, 243, 255, 0.4);
+      --border: rgba(0, 243, 255, 0.2);
+      --border-hover: rgba(0, 243, 255, 0.7);
     }
+    
     * { box-sizing: border-box; margin: 0; padding: 0; }
+    
     body {
-      font-family: 'Inter', system-ui, sans-serif;
+      font-family: 'Rajdhani', sans-serif;
       background: var(--bg);
+      background-image: 
+        radial-gradient(circle at 15% 50%, rgba(0, 243, 255, 0.08), transparent 25%),
+        radial-gradient(circle at 85% 30%, rgba(147, 51, 234, 0.08), transparent 25%);
+      background-attachment: fixed;
       color: var(--text);
       line-height: 1.6;
+      font-size: 1.1rem;
+      overflow-x: hidden;
     }
-    h1, h2, h3 { font-family: 'Poppins', sans-serif; line-height: 1.2; }
+    
+    h1, h2, h3 { font-family: 'Orbitron', sans-serif; line-height: 1.2; letter-spacing: 1px; }
+    
     header {
-      background: var(--primary);
-      color: white;
-      padding: 2rem 1rem;
+      background: linear-gradient(135deg, rgba(15, 23, 42, 0.9) 0%, rgba(2, 6, 23, 0.9) 100%);
+      border-bottom: 1px solid var(--border);
+      padding: 3rem 1rem 2rem;
       text-align: center;
+      position: relative;
+      overflow: hidden;
     }
-    header h1 { font-size: 2rem; margin-bottom: .25rem; }
-    header p { color: #cbd5e1; font-size: .95rem; }
+    header::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, transparent, var(--accent), transparent);
+      animation: scanline 3s linear infinite;
+    }
+    @keyframes scanline {
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(100%); }
+    }
+    header h1 { 
+      font-size: 2.8rem; 
+      margin-bottom: .5rem; 
+      color: #fff;
+      text-shadow: 0 0 10px var(--accent-glow), 0 0 20px var(--accent-glow);
+    }
+    header p { color: var(--muted); font-size: 1.1rem; font-weight: 500; }
+    
     nav {
       display: flex;
       justify-content: center;
-      gap: 1rem;
-      margin-top: 1rem;
+      gap: 1.5rem;
+      margin-top: 1.5rem;
       flex-wrap: wrap;
     }
     nav a {
-      color: white;
+      color: var(--accent);
       text-decoration: none;
-      font-size: .9rem;
-      padding: .4rem .9rem;
-      border-radius: 999px;
-      background: rgba(255,255,255,0.1);
+      font-size: 1rem;
+      font-weight: 600;
+      padding: .5rem 1.2rem;
+      border-radius: 4px;
+      border: 1px solid var(--border);
+      background: rgba(0, 243, 255, 0.05);
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      letter-spacing: 1px;
     }
-    nav a:hover { background: var(--accent); color: var(--primary); }
-    main { max-width: 1100px; margin: 0 auto; padding: 2rem 1rem; }
-    section { margin-bottom: 3rem; }
+    nav a:hover { 
+      background: var(--accent); 
+      color: var(--bg); 
+      box-shadow: 0 0 15px var(--accent-glow);
+    }
+    
+    main { max-width: 1100px; margin: 0 auto; padding: 3rem 1rem; }
+    section { margin-bottom: 4rem; }
     section h2 {
-      font-size: 1.5rem;
-      margin-bottom: 1rem;
-      border-left: 4px solid var(--accent);
-      padding-left: .75rem;
-    }
-    .intro { color: var(--muted); margin-bottom: 1.5rem; }
-
-    /* Buscador */
-    .search-box {
-      display: flex;
-      gap: .5rem;
+      font-size: 1.8rem;
       margin-bottom: 1.5rem;
-      flex-wrap: wrap;
+      color: #fff;
+      border-left: 4px solid var(--accent);
+      padding-left: 1rem;
+      text-shadow: 0 0 8px var(--accent-glow);
     }
-    .search-box input {
-      flex: 1;
-      min-width: 220px;
-      padding: .7rem 1rem;
+    .intro { color: var(--muted); margin-bottom: 2rem; font-size: 1.1rem; }
+
+    /* === NUEVO SELECTOR (LISTBOX) FUTURISTA === */
+    .selector-box {
+      margin-bottom: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .selector-box label {
+      font-family: 'Orbitron', sans-serif;
+      color: var(--accent);
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .selector-box select {
+      width: 100%;
+      padding: 1rem 1.2rem;
+      background: rgba(15, 23, 42, 0.8);
       border: 1px solid var(--border);
       border-radius: 8px;
-      font-size: 1rem;
-    }
-    .search-box button {
-      padding: .7rem 1.2rem;
-      background: var(--primary);
-      color: white;
-      border: none;
-      border-radius: 8px;
+      font-size: 1.1rem;
+      color: var(--text);
+      font-family: 'Rajdhani', sans-serif;
+      outline: none;
       cursor: pointer;
-      font-weight: 600;
+      transition: all 0.3s ease;
+      appearance: none; /* Quita la flecha por defecto */
+      background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%2300f3ff%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+      background-repeat: no-repeat;
+      background-position: right 1rem center;
+      background-size: 0.8em;
     }
-    .search-box button:hover { background: var(--accent); color: var(--primary); }
+    .selector-box select:focus, .selector-box select:hover {
+      border-color: var(--accent);
+      box-shadow: 0 0 15px var(--accent-glow);
+    }
+    .selector-box select option {
+      background: #0f172a;
+      color: var(--text);
+      padding: 0.5rem;
+    }
 
-    /* Grid de módulos */
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 1.25rem;
+    /* === ESTILOS DEL CARRUSEL === */
+    .carousel-container {
+      position: relative;
+      padding: 0 40px;
     }
+    .carousel-track {
+      display: flex;
+      gap: 1.5rem;
+      overflow-x: auto;
+      scroll-behavior: smooth;
+      padding: 1.5rem 0.5rem;
+      scrollbar-width: none;
+    }
+    .carousel-track::-webkit-scrollbar {
+      display: none;
+    }
+    
     .card {
+      flex: 0 0 340px; 
       background: var(--card);
       border: 1px solid var(--border);
       border-radius: 12px;
-      padding: 1.25rem;
+      padding: 1.5rem;
       display: flex;
       flex-direction: column;
-      transition: transform .15s, box-shadow .15s;
+      backdrop-filter: blur(10px);
+      transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+      position: relative;
+      overflow: hidden;
     }
-    .card:hover { transform: translateY(-4px); box-shadow: 0 8px 20px rgba(0,0,0,.08); }
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 3px;
+      background: var(--accent);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s ease;
+    }
+    .card:hover {
+      transform: translateY(-8px);
+      border-color: var(--border-hover);
+      box-shadow: 0 10px 30px rgba(0, 243, 255, 0.15), inset 0 0 20px rgba(0, 243, 255, 0.05);
+    }
+    .card:hover::before { transform: scaleX(1); }
+    
     .card .tag {
       display: inline-block;
-      font-size: .7rem;
-      font-weight: 600;
-      padding: .15rem .6rem;
-      border-radius: 999px;
-      background: #dcfce7;
-      color: #166534;
-      margin-bottom: .5rem;
-      width: fit-content;
-    }
-    .card h3 { font-size: 1.05rem; margin-bottom: .4rem; }
-    .card p { font-size: .9rem; color: var(--muted); margin-bottom: .6rem; }
-    .card .tools {
       font-size: .8rem;
-      color: var(--primary);
-      background: var(--bg);
-      border-radius: 6px;
-      padding: .5rem .6rem;
-      margin-top: auto;
-    }
-    .card .tools strong { display: block; margin-bottom: .2rem; }
-
-    /* Equipo y roles */
-    .team {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-      gap: 1rem;
-    }
-    .team .member {
-      background: var(--card);
+      font-weight: 700;
+      padding: .2rem .8rem;
+      border-radius: 4px;
+      background: rgba(0, 243, 255, 0.1);
+      color: var(--accent);
       border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 1rem;
+      margin-bottom: .8rem;
+      width: fit-content;
+      text-transform: uppercase;
+      letter-spacing: 1px;
     }
-    .team .member strong { display: block; margin-bottom: .25rem; }
-    .team .member span { font-size: .85rem; color: var(--muted); }
+    .card h3 { font-size: 1.1rem; margin-bottom: .5rem; color: #fff; }
+    .card p { font-size: 0.95rem; color: var(--muted); margin-bottom: 1rem; }
+    
+    .card .tools {
+      font-size: .9rem;
+      color: var(--accent);
+      background: rgba(0, 0, 0, 0.4);
+      border-radius: 6px;
+      padding: .8rem;
+      margin-top: auto;
+      border-left: 2px solid var(--accent);
+    }
+    .card .tools strong { display: block; margin-bottom: .3rem; color: #fff; font-family: 'Orbitron', sans-serif; font-size: 0.85rem; }
+
+    /* Botones del Carrusel */
+    .carousel-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0, 243, 255, 0.1);
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      font-size: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 10;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(5px);
+    }
+    .carousel-btn:hover {
+      background: var(--accent);
+      color: var(--bg);
+      box-shadow: 0 0 15px var(--accent-glow);
+    }
+    .carousel-btn.prev { left: -10px; }
+    .carousel-btn.next { right: -10px; }
+
+    /* Acuerdos */
+    ul { color: var(--muted); padding-left: 1.5rem; }
+    li { margin-bottom: 0.8rem; }
+    code {
+      background: rgba(0, 243, 255, 0.1);
+      color: var(--accent);
+      padding: .2rem .4rem;
+      border-radius: 4px;
+      font-family: monospace;
+      font-size: 0.95rem;
+    }
 
     footer {
       text-align: center;
-      padding: 1.5rem;
-      font-size: .85rem;
+      padding: 2rem;
+      font-size: 0.9rem;
       color: var(--muted);
       border-top: 1px solid var(--border);
+      font-family: 'Orbitron', sans-serif;
+      letter-spacing: 2px;
+      background: rgba(2, 6, 23, 0.8);
     }
 
     @media (max-width: 600px) {
-      header h1 { font-size: 1.5rem; }
-      section h2 { font-size: 1.25rem; }
+      header h1 { font-size: 2rem; }
+      section h2 { font-size: 1.5rem; }
+      .carousel-container { padding: 0; }
+      .carousel-btn { display: none; }
+      .card { flex: 0 0 280px; }
     }
   </style>
 </head>
@@ -160,9 +284,7 @@
     <p>Portal de repaso · 3.º Bachillerato Técnico Vocacional en Desarrollo de Software «B» · INDEL</p>
     <nav>
       <a href="#modulos">Módulos</a>
-      <a href="#equipo">Equipo</a>
       <a href="#acuerdos">Acuerdos GitHub</a>
-      <a href="#bitacora">Bitácora</a>
     </nav>
   </header>
 
@@ -170,30 +292,28 @@
 
     <section id="modulos">
       <h2>Mapa del año</h2>
-      <p class="intro">Lista de módulos cursados con el profesor Javier Mineros y el profesor Arcides Canales. Buscá por nombre, profesor o herramienta.</p>
+      <p class="intro">Selecciona un módulo de la lista para ir directamente a él en el carrusel.</p>
 
-      <div class="search-box">
-        <input type="text" id="search" placeholder="Buscar módulo, profesor o herramienta..." />
-        <button type="button" onclick="filtrar()">Buscar</button>
+      <!-- SELECTOR (LISTBOX) EN LUGAR DEL BUSCADOR -->
+      <div class="selector-box">
+        <label for="selectModulo">Selecciona un módulo:</label>
+        <select id="selectModulo">
+          <option value="">-- Ver todos los módulos --</option>
+          <!-- Las opciones se llenan con JavaScript -->
+        </select>
       </div>
 
-      <div class="grid" id="listaModulos"></div>
-    </section>
-
-    <section id="equipo">
-      <h2>Equipo y roles</h2>
-      <p class="intro">Cada integrante es dueño de sus módulos y sus commits llevan su nombre.</p>
-      <div class="team">
-        <div class="member"><strong>Integrante 1</strong><span>Líder Git · Módulos 3.1 y 3.2</span></div>
-        <div class="member"><strong>Integrante 2</strong><span>Diseñador UI · Módulos 3.3 y 3.4</span></div>
-        <div class="member"><strong>Integrante 3</strong><span>Curador de contenido · Módulos 3.8 y 4</span></div>
-        <div class="member"><strong>Integrante 4</strong><span>QA y accesibilidad · Módulos 2 y 3</span></div>
+      <!-- CARRUSEL CON MOVIMIENTO AUTOMÁTICO -->
+      <div class="carousel-container" id="carouselContainer">
+        <button class="carousel-btn prev" onclick="moverCarrusel(-1)">&#10094;</button>
+        <div class="carousel-track" id="listaModulos"></div>
+        <button class="carousel-btn next" onclick="moverCarrusel(1)">&#10095;</button>
       </div>
     </section>
 
     <section id="acuerdos">
       <h2>Acuerdos de trabajo en GitHub</h2>
-      <ul style="color:var(--muted); padding-left:1.25rem;">
+      <ul>
         <li>Commits con formato <code>tipo: descripción</code> (ej. <code>feat: agregar ficha módulo 3.1</code>).</li>
         <li>Antes de subir: <code>git pull</code> para evitar conflictos.</li>
         <li>Nunca se suben contraseñas, claves, tokens ni datos personales.</li>
@@ -201,88 +321,76 @@
       </ul>
     </section>
 
-    <section id="bitacora">
-      <h2>Bitácora del Día 1</h2>
-      <p class="intro">Cada integrante escribe su bitácora en un archivo propio (con su nombre).</p>
-      <ul style="color:var(--muted); padding-left:1.25rem;">
-        <li>Hoy aprendí o recordé…</li>
-        <li>Lo que me costó…</li>
-        <li>Cómo lo resolví (incluyendo qué le pregunté a la IA)…</li>
-        <li>Mañana voy a…</li>
-      </ul>
-    </section>
-
   </main>
 
   <footer>
-    HUB 3DS·B · Repaso integral del año · Guía del profesor Javier Arturo García Mineros · INDEL
+    HUB 3DS·B · SISTEMA ACTIVO
   </footer>
 
   <script>
     // ==== DATOS DE LOS MÓDULOS ====
     const modulos = [
       {
-        nombre: "BTVDS 3.1 — Desarrollo de aplicaciones de software para la solución de problemas",
+        nombre: "BTVDS 3.1 — Desarrollo de aplicaciones",
         profesor: "Arcides Canales",
         resumen: "Desarrollo de aplicaciones para resolver problemas reales usando Visual Studio, Windows Forms, .NET MAUI, ASPX y PrestaShop.",
-        herramientas: ["Visual Studio", "Windows Forms", ".NET MAUI", "ASPX", "PrestaShop"]
+        herramientas: ["Visual Studio", "Windows Forms", ".NET MAUI", "ASPX", "PrestaShop", "Java"]
       },
       {
-        nombre: "Módulo 2 — Desarrollo de componentes para dispositivos móviles",
+        nombre: "Módulo 2 — Componentes móviles",
         profesor: "Arcides Canales",
         resumen: "Creación de componentes y apps móviles, integrando interfaces y lógica para dispositivos.",
         herramientas: ["Visual Studio", ".NET MAUI", "Windows Forms"]
       },
       {
-        nombre: "Módulo 3 — Conversación de inglés sobre mantenimiento de sistemas informáticos",
+        nombre: "Módulo 3 — Inglés técnico",
         profesor: "Arcides Canales",
         resumen: "Práctica de conversación en inglés técnico aplicada al mantenimiento de sistemas informáticos.",
-        herramientas: ["Inglés técnico", "Vocabulario de mantenimiento", "Role-play"]
+        herramientas: ["Inglés técnico", "Vocabulario", "Role-play"]
       },
       {
-        nombre: "Módulo 4 — Puesta en marcha de la empresa en asociatividad cooperativa",
+        nombre: "Módulo 4 — Empresa cooperativa",
         profesor: "Arcides Canales",
         resumen: "Emprendimiento y constitución de una empresa bajo modelo cooperativo: plan, organización y puesta en marcha.",
-        herramientas: ["Plan de negocio", "Documentos cooperativos", "Presentaciones"]
+        herramientas: ["Plan de negocio", "Documentos", "Presentaciones"]
       },
       {
-        nombre: "Módulo 3.8 — Proyecto innovador de Desarrollo de Software",
+        nombre: "Módulo 3.8 — Proyecto innovador",
         profesor: "Javier Mineros",
         resumen: "Diseño y desarrollo de un proyecto innovador de software aplicando todo lo aprendido en el año.",
-        herramientas: ["Visual Studio Code", "Python", "PHP", "IA"]
+        herramientas: ["VS Code", "Python", "PHP", "IA"]
       },
       {
-        nombre: "Módulo 3.4 — Elaboración de documentación de Sistemas informáticos",
+        nombre: "Módulo 3.4 — Documentación técnica",
         profesor: "Javier Mineros",
         resumen: "Documentación técnica de sistemas: manuales, diagramas, especificaciones y estándares.",
-        herramientas: ["Visual Studio Code", "Markdown", "IA"]
+        herramientas: ["VS Code", "Markdown", "IA"]
       },
       {
-        nombre: "Módulo 3.3 — Administración de Bases de Datos",
+        nombre: "Módulo 3.3 — Bases de Datos",
         profesor: "Javier Mineros",
         resumen: "Diseño, creación y administración de bases de datos relacionales con XAMPP y PHP.",
         herramientas: ["XAMPP", "MySQL", "PHP", "phpMyAdmin"]
       },
       {
-        nombre: "Módulo 3.2 — Mantenimiento y aseguramiento de la operación del sistema informático",
+        nombre: "Módulo 3.2 — Mantenimiento de sistemas",
         profesor: "Javier Mineros",
         resumen: "Mantenimiento preventivo y correctivo, respaldo y aseguramiento de la operación de sistemas.",
-        herramientas: ["Avalonia", "Python", "XAMPP", "Visual Studio Code"]
+        herramientas: ["Avalonia", "Python", "XAMPP", "VS Code"]
       }
     ];
 
     const lista = document.getElementById("listaModulos");
-    const input = document.getElementById("search");
+    const selectModulo = document.getElementById("selectModulo");
+    const container = document.getElementById("carouselContainer");
 
-    function renderizar(listaModulos) {
+    // Renderizar las tarjetas en el carrusel
+    function renderizarTarjetas() {
       lista.innerHTML = "";
-      if (listaModulos.length === 0) {
-        lista.innerHTML = "<p style='color:var(--muted)'>No se encontraron módulos.</p>";
-        return;
-      }
-      listaModulos.forEach(m => {
+      modulos.forEach((m, index) => {
         const card = document.createElement("article");
         card.className = "card";
+        card.id = `card-${index}`; // ID único para poder ubicarla
         card.innerHTML = `
           <span class="tag">${m.profesor}</span>
           <h3>${m.nombre}</h3>
@@ -296,19 +404,78 @@
       });
     }
 
-    function filtrar() {
-      const q = input.value.toLowerCase().trim();
-      const filtrados = modulos.filter(m =>
-        m.nombre.toLowerCase().includes(q) ||
-        m.profesor.toLowerCase().includes(q) ||
-        m.resumen.toLowerCase().includes(q) ||
-        m.herramientas.join(" ").toLowerCase().includes(q)
-      );
-      renderizar(filtrados);
+    // Llenar el Listbox (Select) con los nombres de los módulos
+    function llenarSelect() {
+      modulos.forEach((m, index) => {
+        const option = document.createElement("option");
+        option.value = index;
+        option.textContent = m.nombre;
+        selectModulo.appendChild(option);
+      });
     }
 
-    input.addEventListener("input", filtrar);
-    renderizar(modulos);
+    // Movimiento manual con flechas
+    function moverCarrusel(direccion) {
+      const scrollAmount = 360 * direccion;
+      lista.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+    }
+
+    // ==== MOVIMIENTO AUTOMÁTICO ====
+    let autoScrollInterval;
+
+    function iniciarAutoScroll() {
+      autoScrollInterval = setInterval(() => {
+        if (lista.scrollLeft + lista.clientWidth >= lista.scrollWidth - 10) {
+          lista.scrollTo({ left: 0, behavior: 'smooth' });
+        } else {
+          lista.scrollBy({ left: 360, behavior: 'smooth' });
+        }
+      }, 3000);
+    }
+
+    function detenerAutoScroll() {
+      clearInterval(autoScrollInterval);
+    }
+
+    // Pausar al pasar el mouse o tocar
+    container.addEventListener("mouseenter", detenerAutoScroll);
+    container.addEventListener("mouseleave", iniciarAutoScroll);
+    container.addEventListener("touchstart", detenerAutoScroll, {passive: true});
+    container.addEventListener("touchend", iniciarAutoScroll, {passive: true});
+
+    // ==== EVENTO DEL SELECTOR ====
+    selectModulo.addEventListener("change", (e) => {
+      const index = e.target.value;
+      
+      if (index === "") {
+        // Si selecciona "Ver todos", reiniciamos el carrusel al inicio y dejamos que siga
+        detenerAutoScroll();
+        lista.scrollTo({ left: 0, behavior: 'smooth' });
+        setTimeout(iniciarAutoScroll, 1000); 
+        return;
+      }
+
+      // Pausar el auto-scroll para que el usuario pueda leer
+      detenerAutoScroll();
+
+      // Buscar la tarjeta seleccionada y mover el carrusel hasta ella
+      const targetCard = document.getElementById(`card-${index}`);
+      if (targetCard) {
+        // Calcula la posición de la tarjeta dentro del contenedor
+        const scrollPosition = targetCard.offsetLeft - lista.offsetLeft - 20; 
+        lista.scrollTo({ left: scrollPosition, behavior: 'smooth' });
+        
+        // Efecto visual para resaltar la tarjeta seleccionada
+        document.querySelectorAll('.card').forEach(c => c.style.borderColor = 'var(--border)');
+        targetCard.style.borderColor = 'var(--accent)';
+        targetCard.style.boxShadow = '0 0 25px var(--accent-glow)';
+      }
+    });
+
+    // Inicializar todo
+    renderizarTarjetas();
+    llenarSelect();
+    iniciarAutoScroll();
   </script>
 </body>
 </html>
