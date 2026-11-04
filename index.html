@@ -184,6 +184,37 @@
       color: var(--text);
     }
 
+    /* === BOTÓN DE ALTERNAR VISTA === */
+    .view-toggle {
+      display: flex;
+      justify-content: flex-end;
+      margin-bottom: 1rem;
+      gap: 0.5rem;
+    }
+    .btn-view {
+      padding: 0.6rem 1.2rem;
+      background: transparent;
+      color: var(--muted);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      cursor: pointer;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: all 0.3s ease;
+    }
+    .btn-view:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+    .btn-view.activo {
+      background: var(--accent);
+      color: var(--bg);
+      border-color: var(--accent);
+      box-shadow: 0 0 10px var(--accent-glow);
+    }
+
     /* === ESTILOS DEL CARRUSEL === */
     .carousel-container {
       position: relative;
@@ -312,6 +343,61 @@
     }
     .carousel-btn.prev { left: -10px; }
     .carousel-btn.next { right: -10px; }
+
+    /* === NUEVA VISTA DE LISTA === */
+    .lista-container {
+      display: none; /* Oculto por defecto */
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      backdrop-filter: blur(10px);
+      overflow-x: auto;
+    }
+    .lista-container.visible {
+      display: block;
+    }
+    .tabla-modulos {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 800px;
+    }
+    .tabla-modulos th {
+      font-family: 'Orbitron', sans-serif;
+      color: var(--accent);
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      padding: 1rem;
+      text-align: left;
+      border-bottom: 2px solid var(--border);
+    }
+    .tabla-modulos td {
+      padding: 1rem;
+      border-bottom: 1px solid rgba(0, 243, 255, 0.1);
+      font-size: 0.95rem;
+      vertical-align: top;
+    }
+    .tabla-modulos tr:hover td {
+      background: rgba(0, 243, 255, 0.05);
+    }
+    .tabla-modulos td:first-child {
+      color: #fff;
+      font-weight: 600;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.9rem;
+    }
+    .tabla-modulos td:nth-child(2) {
+      color: var(--accent);
+      font-weight: 600;
+    }
+    .tabla-modulos td:nth-child(3) {
+      color: var(--muted);
+    }
+    .tabla-modulos td:nth-child(4) {
+      color: #a5f3fc;
+      font-style: italic;
+    }
 
     /* === BARRA DE PROGRESO GLOBAL === */
     .progress-container {
@@ -565,11 +651,34 @@
         </select>
       </div>
 
+      <!-- BOTONES PARA CAMBIAR DE VISTA -->
+      <div class="view-toggle">
+        <button class="btn-view activo" id="btnVistaCarrusel" onclick="cambiarVista('carrusel')"> Carrusel</button>
+        <button class="btn-view" id="btnVistaLista" onclick="cambiarVista('lista')"> Ver Lista Detallada</button>
+      </div>
+
       <!-- CARRUSEL -->
       <div class="carousel-container" id="carouselContainer">
         <button class="carousel-btn prev" onclick="moverCarrusel(-1)">&#10094;</button>
         <div class="carousel-track" id="listaModulos"></div>
         <button class="carousel-btn next" onclick="moverCarrusel(1)">&#10095;</button>
+      </div>
+
+      <!-- NUEVA VISTA DE LISTA -->
+      <div class="lista-container" id="vistaLista">
+        <table class="tabla-modulos">
+          <thead>
+            <tr>
+              <th>Módulo</th>
+              <th>Profesor</th>
+              <th>Herramientas</th>
+              <th>Lo Aprendido</th>
+            </tr>
+          </thead>
+          <tbody id="cuerpoTabla">
+            <!-- Se llena con JavaScript -->
+          </tbody>
+        </table>
       </div>
     </section>
 
@@ -628,50 +737,24 @@ git push -u origin main
   </footer>
 
   <script>
-    // ==== DATOS DE LOS MÓDULOS ====
+    // ==== DATOS DE LOS MÓDULOS (SE MANTIENEN INTACTOS) ====
     const modulos = [
-      { id: 0, nombre: "BTVDS 3.1 — Desarrollo de aplicaciones", profesor: "Arcides Canales", resumen: "Desarrollo de aplicaciones para resolver problemas reales usando Visual Studio, Windows Forms, .NET MAUI, ASPX y PrestaShop.", herramientas: ["Visual Studio", "Windows Forms", ".NET MAUI", "ASPX", "PrestaShop", "Java"] },
-      { id: 1, nombre: "Módulo 2 — Componentes móviles", profesor: "Arcides Canales", resumen: "Creación de componentes y apps móviles, integrando interfaces y lógica para dispositivos.", herramientas: ["Visual Studio", ".NET MAUI", "Windows Forms"] },
-      { id: 2, nombre: "Módulo 3 — Inglés técnico", profesor: "Arcides Canales", resumen: "Práctica de conversación en inglés técnico aplicada al mantenimiento de sistemas informáticos.", herramientas: ["Inglés técnico", "Vocabulario", "Role-play"] },
-      { id: 3, nombre: "Módulo 4 — Empresa cooperativa", profesor: "Arcides Canales", resumen: "Emprendimiento y constitución de una empresa bajo modelo cooperativo: plan, organización y puesta en marcha.", herramientas: ["Plan de negocio", "Documentos", "Presentaciones"] },
-      { id: 4, nombre: "Módulo 3.8 — Proyecto innovador", profesor: "Javier Mineros", resumen: "Diseño y desarrollo de un proyecto innovador de software aplicando todo lo aprendido en el año.", herramientas: ["VS Code", "Python", "PHP", "IA"] },
-      { id: 5, nombre: "Módulo 3.4 — Documentación técnica", profesor: "Javier Mineros", resumen: "Documentación técnica de sistemas: manuales, diagramas, especificaciones y estándares.", herramientas: ["VS Code", "Markdown", "IA"] },
-      { id: 6, nombre: "Módulo 3.3 — Bases de Datos", profesor: "Javier Mineros", resumen: "Diseño, creación y administración de bases de datos relacionales con XAMPP y PHP.", herramientas: ["XAMPP", "MySQL", "PHP", "phpMyAdmin"] },
-      { id: 7, nombre: "Módulo 3.2 — Mantenimiento de sistemas", profesor: "Javier Mineros", resumen: "Mantenimiento preventivo y correctivo, respaldo y aseguramiento de la operación de sistemas.", herramientas: ["Avalonia", "Python", "XAMPP", "VS Code"] }
+      { id: 0, nombre: "BTVDS 3.1 — Desarrollo de aplicaciones", profesor: "Arcides Canales", resumen: "Desarrollo de aplicaciones para resolver problemas reales usando Visual Studio, Windows Forms, .NET MAUI, ASPX y PrestaShop.", herramientas: ["Visual Studio", "Windows Forms", ".NET MAUI", "ASPX", "PrestaShop", "Java"], aprendido: "Desarrollo de software a la medida, interfaces de usuario y lógica de negocios." },
+      { id: 1, nombre: "Módulo 2 — Componentes móviles", profesor: "Arcides Canales", resumen: "Creación de componentes y apps móviles, integrando interfaces y lógica para dispositivos.", herramientas: ["Visual Studio", ".NET MAUI", "Windows Forms"], aprendido: "Creación de apps para celulares y adaptación de interfaces a dispositivos móviles." },
+      { id: 2, nombre: "Módulo 3 — Inglés técnico", profesor: "Arcides Canales", resumen: "Práctica de conversación en inglés técnico aplicada al mantenimiento de sistemas informáticos.", herramientas: ["Inglés técnico", "Vocabulario", "Role-play"], aprendido: "Comunicación oral y escrita en inglés enfocada a soporte técnico y sistemas." },
+      { id: 3, nombre: "Módulo 4 — Empresa cooperativa", profesor: "Arcides Canales", resumen: "Emprendimiento y constitución de una empresa bajo modelo cooperativo: plan, organización y puesta en marcha.", herramientas: ["Plan de negocio", "Documentos", "Presentaciones"], aprendido: "Cómo crear y organizar una cooperativa, planes de negocio y trabajo en equipo." },
+      { id: 4, nombre: "Módulo 3.8 — Proyecto innovador", profesor: "Javier Mineros", resumen: "Diseño y desarrollo de un proyecto innovador de software aplicando todo lo aprendido en el año.", herramientas: ["VS Code", "Python", "PHP", "IA"], aprendido: "Gestión de proyectos reales, innovación y uso de IA como apoyo al desarrollo." },
+      { id: 5, nombre: "Módulo 3.4 — Documentación técnica", profesor: "Javier Mineros", resumen: "Documentación técnica de sistemas: manuales, diagramas, especificaciones y estándares.", herramientas: ["VS Code", "Markdown", "IA"], aprendido: "Redacción de manuales, diagramas de flujo y documentación de sistemas." },
+      { id: 6, nombre: "Módulo 3.3 — Bases de Datos", profesor: "Javier Mineros", resumen: "Diseño, creación y administración de bases de datos relacionales con XAMPP y PHP.", herramientas: ["XAMPP", "MySQL", "PHP", "phpMyAdmin"], aprendido: "Modelado de datos, consultas SQL y administración de bases de datos MySQL." },
+      { id: 7, nombre: "Módulo 3.2 — Mantenimiento de sistemas", profesor: "Javier Mineros", resumen: "Mantenimiento preventivo y correctivo, respaldo y aseguramiento de la operación de sistemas.", herramientas: ["Avalonia", "Python", "XAMPP", "VS Code"], aprendido: "Diagnóstico de fallas, mantenimiento de software y respaldo de información." }
     ];
 
-    // ==== PREGUNTAS DEL QUIZ (5 PREGUNTAS FÁCILES) ====
     const preguntas = [
-      { 
-        pregunta: "¿Cuál es el nombre de este portal?", 
-        opciones: ["HUB 3DS·B", "Portal Web", "Sistema INDEL", "Repaso Anual"], 
-        correcta: 0, 
-        explicacion: "¡Correcto! El portal se llama HUB 3DS·B." 
-      },
-      { 
-        pregunta: "¿Cuántos módulos se muestran en el Mapa del año?", 
-        opciones: ["5 módulos", "8 módulos", "10 módulos", "4 módulos"], 
-        correcta: 1, 
-        explicacion: "¡Exacto! En la página se muestran 8 módulos en total." 
-      },
-      { 
-        pregunta: "¿Qué herramienta se usa para administrar bases de datos?", 
-        opciones: ["Windows Forms", "PHP", "XAMPP", "Avalonia"], 
-        correcta: 2, 
-        explicacion: "¡Bien! XAMPP se usa en el Módulo 3.3 de Bases de Datos." 
-      },
-      { 
-        pregunta: "¿Qué lenguaje se agregó a las herramientas del Módulo 3.1?", 
-        opciones: ["Python", "Java", "C#", "PHP"], 
-        correcta: 1, 
-        explicacion: "¡Así es! Java fue agregado al Módulo 3.1." 
-      },
-      { 
-        pregunta: "¿Dónde se guarda tu progreso de repaso?", 
-        opciones: ["En una base de datos", "En el navegador", "En un archivo de texto", "Se pierde al cerrar"], 
-        correcta: 1, 
-        explicacion: "¡Correcto! El progreso se guarda en el navegador con localStorage." 
-      }
+      { pregunta: "¿Cuál es el nombre de este portal?", opciones: ["HUB 3DS·B", "Portal Web", "Sistema INDEL", "Repaso Anual"], correcta: 0, explicacion: "¡Correcto! El portal se llama HUB 3DS·B." },
+      { pregunta: "¿Cuántos módulos se muestran en el Mapa del año?", opciones: ["5 módulos", "8 módulos", "10 módulos", "4 módulos"], correcta: 1, explicacion: "¡Exacto! En la página se muestran 8 módulos en total." },
+      { pregunta: "¿Qué herramienta se usa para administrar bases de datos?", opciones: ["Windows Forms", "PHP", "XAMPP", "Avalonia"], correcta: 2, explicacion: "¡Bien! XAMPP se usa en el Módulo 3.3 de Bases de Datos." },
+      { pregunta: "¿Qué lenguaje se agregó a las herramientas del Módulo 3.1?", opciones: ["Python", "Java", "C#", "PHP"], correcta: 1, explicacion: "¡Así es! Java fue agregado al Módulo 3.1." },
+      { pregunta: "¿Dónde se guarda tu progreso de repaso?", opciones: ["En una base de datos", "En el navegador", "En un archivo de texto", "Se pierde al cerrar"], correcta: 1, explicacion: "¡Correcto! El progreso se guarda en el navegador con localStorage." }
     ];
 
     const lista = document.getElementById("listaModulos");
@@ -687,6 +770,12 @@ git push -u origin main
     const quizFeedback = document.getElementById("quizFeedback");
     const btnSiguiente = document.getElementById("btnSiguiente");
     const quizScore = document.getElementById("quizScore");
+    
+    // Nuevas referencias para la vista de lista
+    const vistaLista = document.getElementById("vistaLista");
+    const cuerpoTabla = document.getElementById("cuerpoTabla");
+    const btnVistaCarrusel = document.getElementById("btnVistaCarrusel");
+    const btnVistaLista = document.getElementById("btnVistaLista");
 
     let progreso = JSON.parse(localStorage.getItem("hubProgreso")) || {};
 
@@ -699,13 +788,61 @@ git push -u origin main
       progresoTexto.textContent = `${completados} / ${total}`;
     }
 
-    // Llenar el Select (Listbox)
     function llenarSelect() {
       modulos.forEach((m, index) => {
         const option = document.createElement("option");
         option.value = index;
         option.textContent = m.nombre;
         selectModulo.appendChild(option);
+      });
+    }
+
+    // ==== NUEVA FUNCIÓN PARA CAMBIAR VISTA ====
+    function cambiarVista(vista) {
+      if (vista === 'carrusel') {
+        container.style.display = 'block';
+        vistaLista.classList.remove('visible');
+        btnVistaCarrusel.classList.add('activo');
+        btnVistaLista.classList.remove('activo');
+        iniciarAutoScroll();
+      } else {
+        container.style.display = 'none';
+        vistaLista.classList.add('visible');
+        btnVistaLista.classList.add('activo');
+        btnVistaCarrusel.classList.remove('activo');
+        detenerAutoScroll();
+      }
+    }
+
+    // ==== RENDERIZAR TABLA (VISTA LISTA) ====
+    function renderizarTabla() {
+      cuerpoTabla.innerHTML = "";
+      const query = searchInput.value.toLowerCase().trim();
+      const profFiltro = filtroProfesor.value;
+      const estadoFiltro = filtroEstado.value;
+
+      const filtrados = modulos.filter(m => {
+        const coincideBusqueda = m.nombre.toLowerCase().includes(query) || m.profesor.toLowerCase().includes(query) || m.resumen.toLowerCase().includes(query) || m.herramientas.join(" ").toLowerCase().includes(query);
+        const coincideProfesor = profFiltro === "" || m.profesor === profFiltro;
+        const estaCompletado = !!progreso[m.id];
+        const coincideEstado = estadoFiltro === "" || (estadoFiltro === "completado" && estaCompletado) || (estadoFiltro === "pendiente" && !estaCompletado);
+        return coincideBusqueda && coincideProfesor && coincideEstado;
+      });
+
+      if (filtrados.length === 0) {
+        cuerpoTabla.innerHTML = "<tr><td colspan='4' style='text-align:center; color:var(--muted);'>No se encontraron módulos con esos filtros.</td></tr>";
+        return;
+      }
+
+      filtrados.forEach(m => {
+        const fila = document.createElement("tr");
+        fila.innerHTML = `
+          <td>${m.nombre}</td>
+          <td>${m.profesor}</td>
+          <td>${m.herramientas.join(" · ")}</td>
+          <td>${m.aprendido}</td>
+        `;
+        cuerpoTabla.appendChild(fila);
       });
     }
 
@@ -747,6 +884,9 @@ git push -u origin main
         `;
         lista.appendChild(card);
       });
+      
+      // También actualizamos la tabla por si acaso
+      renderizarTabla();
     }
 
     function toggleProgreso(id) {
@@ -762,6 +902,7 @@ git push -u origin main
 
     let autoScrollInterval;
     function iniciarAutoScroll() {
+      clearInterval(autoScrollInterval);
       autoScrollInterval = setInterval(() => {
         if (lista.scrollLeft + lista.clientWidth >= lista.scrollWidth - 10) {
           lista.scrollTo({ left: 0, behavior: 'smooth' });
@@ -773,32 +914,45 @@ git push -u origin main
     function detenerAutoScroll() { clearInterval(autoScrollInterval); }
 
     container.addEventListener("mouseenter", detenerAutoScroll);
-    container.addEventListener("mouseleave", iniciarAutoScroll);
+    container.addEventListener("mouseleave", () => {
+      if (container.style.display !== 'none') iniciarAutoScroll();
+    });
     container.addEventListener("touchstart", detenerAutoScroll, {passive: true});
-    container.addEventListener("touchend", iniciarAutoScroll, {passive: true});
+    container.addEventListener("touchend", () => {
+      if (container.style.display !== 'none') iniciarAutoScroll();
+    });
 
-    searchInput.addEventListener("input", renderizarTarjetas);
-    filtroProfesor.addEventListener("change", renderizarTarjetas);
-    filtroEstado.addEventListener("change", renderizarTarjetas);
+    searchInput.addEventListener("input", () => {
+      renderizarTarjetas();
+      renderizarTabla();
+    });
+    filtroProfesor.addEventListener("change", () => {
+      renderizarTarjetas();
+      renderizarTabla();
+    });
+    filtroEstado.addEventListener("change", () => {
+      renderizarTarjetas();
+      renderizarTabla();
+    });
 
-    // Evento del Select para mover el carrusel
     selectModulo.addEventListener("change", (e) => {
       const index = e.target.value;
       if (index === "") {
         detenerAutoScroll();
         lista.scrollTo({ left: 0, behavior: 'smooth' });
-        setTimeout(iniciarAutoScroll, 1000); 
+        setTimeout(() => {
+          if (container.style.display !== 'none') iniciarAutoScroll();
+        }, 1000); 
         return;
       }
       detenerAutoScroll();
-      // Buscamos la tarjeta (limpiamos filtros primero)
       searchInput.value = "";
       filtroProfesor.value = "";
       filtroEstado.value = "";
       renderizarTarjetas();
 
       const targetCard = document.getElementById(`card-${index}`);
-      if (targetCard) {
+      if (targetCard && container.style.display !== 'none') {
         const scrollPosition = targetCard.offsetLeft - lista.offsetLeft - 20; 
         lista.scrollTo({ left: scrollPosition, behavior: 'smooth' });
         document.querySelectorAll('.card').forEach(c => {
