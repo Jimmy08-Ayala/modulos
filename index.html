@@ -17,6 +17,8 @@
       --accent-glow: rgba(0, 243, 255, 0.4);
       --border: rgba(0, 243, 255, 0.2);
       --border-hover: rgba(0, 243, 255, 0.7);
+      --success: #22c55e;
+      --error: #ef4444;
     }
     
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -101,19 +103,18 @@
     }
     .intro { color: var(--muted); margin-bottom: 2rem; font-size: 1.1rem; }
 
-    /* === NUEVO SELECTOR (LISTBOX) FUTURISTA === */
+    /* === SELECTOR Y BUSCADOR === */
     .selector-box {
-      margin-bottom: 2rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
+      margin-bottom: 1.5rem;
     }
     .selector-box label {
+      display: block;
       font-family: 'Orbitron', sans-serif;
       color: var(--accent);
       font-size: 0.9rem;
       text-transform: uppercase;
       letter-spacing: 1px;
+      margin-bottom: 0.5rem;
     }
     .selector-box select {
       width: 100%;
@@ -127,7 +128,7 @@
       outline: none;
       cursor: pointer;
       transition: all 0.3s ease;
-      appearance: none; /* Quita la flecha por defecto */
+      appearance: none;
       background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%2300f3ff%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
       background-repeat: no-repeat;
       background-position: right 1rem center;
@@ -140,7 +141,47 @@
     .selector-box select option {
       background: #0f172a;
       color: var(--text);
-      padding: 0.5rem;
+    }
+
+    .search-filter-box {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+      background: rgba(15, 23, 42, 0.5);
+      padding: 1.5rem;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      backdrop-filter: blur(10px);
+    }
+    .search-filter-box input, .search-filter-box select {
+      flex: 1;
+      min-width: 200px;
+      padding: 1rem 1.2rem;
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: 1rem;
+      color: var(--text);
+      font-family: 'Rajdhani', sans-serif;
+      outline: none;
+      transition: all 0.3s ease;
+    }
+    .search-filter-box input:focus, .search-filter-box select:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 15px var(--accent-glow);
+    }
+    .search-filter-box select {
+      cursor: pointer;
+      appearance: none;
+      background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%2300f3ff%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+      background-repeat: no-repeat;
+      background-position: right 1rem center;
+      background-size: 0.8em;
+    }
+    .search-filter-box select option {
+      background: #0f172a;
+      color: var(--text);
     }
 
     /* === ESTILOS DEL CARRUSEL === */
@@ -214,10 +255,37 @@
       padding: .8rem;
       margin-top: auto;
       border-left: 2px solid var(--accent);
+      margin-bottom: 1rem;
     }
     .card .tools strong { display: block; margin-bottom: .3rem; color: #fff; font-family: 'Orbitron', sans-serif; font-size: 0.85rem; }
 
-    /* Botones del Carrusel */
+    .btn-progreso {
+      width: 100%;
+      padding: 0.8rem;
+      background: transparent;
+      color: var(--accent);
+      border: 1px solid var(--accent);
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 700;
+      font-family: 'Orbitron', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: all 0.3s ease;
+      font-size: 0.85rem;
+    }
+    .btn-progreso:hover {
+      background: var(--accent);
+      color: var(--bg);
+      box-shadow: 0 0 15px var(--accent-glow);
+    }
+    .btn-progreso.completado {
+      background: var(--success);
+      border-color: var(--success);
+      color: #fff;
+      box-shadow: 0 0 15px rgba(34, 197, 94, 0.5);
+    }
+
     .carousel-btn {
       position: absolute;
       top: 50%;
@@ -245,7 +313,171 @@
     .carousel-btn.prev { left: -10px; }
     .carousel-btn.next { right: -10px; }
 
-    /* Acuerdos */
+    /* === BARRA DE PROGRESO GLOBAL === */
+    .progress-container {
+      margin-bottom: 2rem;
+      background: rgba(15, 23, 42, 0.5);
+      padding: 1.5rem;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+    }
+    .progress-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 0.8rem;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.9rem;
+      color: var(--accent);
+    }
+    .progress-bar-bg {
+      width: 100%;
+      height: 12px;
+      background: rgba(0, 0, 0, 0.5);
+      border-radius: 6px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    .progress-bar-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--accent), #9333ea);
+      border-radius: 6px;
+      transition: width 0.5s ease;
+      box-shadow: 0 0 10px var(--accent-glow);
+    }
+
+    /* === QUIZ INTERACTIVO === */
+    .quiz-box {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 2rem;
+      backdrop-filter: blur(10px);
+    }
+    .quiz-pregunta {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.3rem;
+      margin-bottom: 1.5rem;
+      color: #fff;
+    }
+    .quiz-opciones {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    .quiz-opcion {
+      padding: 1rem 1.2rem;
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      color: var(--text);
+      font-size: 1rem;
+      text-align: left;
+      font-family: 'Rajdhani', sans-serif;
+    }
+    .quiz-opcion:hover {
+      border-color: var(--accent);
+      background: rgba(0, 243, 255, 0.05);
+    }
+    .quiz-opcion.correcta {
+      background: rgba(34, 197, 94, 0.2);
+      border-color: var(--success);
+      color: #fff;
+      box-shadow: 0 0 15px rgba(34, 197, 94, 0.3);
+    }
+    .quiz-opcion.incorrecta {
+      background: rgba(239, 68, 68, 0.2);
+      border-color: var(--error);
+      color: #fff;
+      box-shadow: 0 0 15px rgba(239, 68, 68, 0.3);
+    }
+    .quiz-opcion:disabled {
+      cursor: not-allowed;
+      opacity: 0.8;
+    }
+    .quiz-feedback {
+      padding: 1rem;
+      border-radius: 8px;
+      margin-bottom: 1.5rem;
+      font-weight: 600;
+      display: none;
+      animation: fadeIn 0.4s ease;
+    }
+    .quiz-feedback.correcta {
+      display: block;
+      background: rgba(34, 197, 94, 0.15);
+      border: 1px solid var(--success);
+      color: var(--success);
+    }
+    .quiz-feedback.incorrecta {
+      display: block;
+      background: rgba(239, 68, 68, 0.15);
+      border: 1px solid var(--error);
+      color: var(--error);
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .btn-quiz {
+      padding: 1rem 2rem;
+      background: transparent;
+      color: var(--accent);
+      border: 1px solid var(--accent);
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 700;
+      font-family: 'Orbitron', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: all 0.3s ease;
+    }
+    .btn-quiz:hover:not(:disabled) {
+      background: var(--accent);
+      color: var(--bg);
+      box-shadow: 0 0 20px var(--accent-glow);
+    }
+    .btn-quiz:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+    }
+    .quiz-score {
+      margin-top: 1.5rem;
+      font-family: 'Orbitron', sans-serif;
+      color: var(--accent);
+      text-align: center;
+      font-size: 1.1rem;
+    }
+
+    /* === ACUERDOS Y COMANDOS GIT === */
+    .git-box {
+      background: rgba(0, 0, 0, 0.4);
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin-top: 1.5rem;
+      border-left: 3px solid var(--accent);
+    }
+    .git-box h3 {
+      font-size: 1.1rem;
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+    .git-code {
+      font-family: 'Courier New', monospace;
+      background: rgba(15, 23, 42, 0.8);
+      padding: 1rem;
+      border-radius: 6px;
+      color: #a5f3fc;
+      font-size: 0.95rem;
+      line-height: 1.8;
+      overflow-x: auto;
+      border: 1px solid var(--border);
+      white-space: pre;
+    }
+
     ul { color: var(--muted); padding-left: 1.5rem; }
     li { margin-bottom: 0.8rem; }
     code {
@@ -284,26 +516,56 @@
     <p>Portal de repaso · 3.º Bachillerato Técnico Vocacional en Desarrollo de Software «B» · INDEL</p>
     <nav>
       <a href="#modulos">Módulos</a>
+      <a href="#progreso">Progreso</a>
+      <a href="#quiz">Quiz</a>
       <a href="#acuerdos">Acuerdos GitHub</a>
     </nav>
   </header>
 
   <main>
 
+    <!-- PROGRESO GLOBAL -->
+    <section id="progreso">
+      <h2>Tu progreso de repaso</h2>
+      <div class="progress-container">
+        <div class="progress-header">
+          <span>Módulos completados</span>
+          <span id="progresoTexto">0 / 8</span>
+        </div>
+        <div class="progress-bar-bg">
+          <div class="progress-bar-fill" id="progressBar"></div>
+        </div>
+      </div>
+    </section>
+
     <section id="modulos">
       <h2>Mapa del año</h2>
-      <p class="intro">Selecciona un módulo de la lista para ir directamente a él en el carrusel.</p>
+      <p class="intro">Selecciona un módulo de la lista, usa el buscador o filtra en tiempo real. Marca los módulos como completados para guardar tu progreso.</p>
 
-      <!-- SELECTOR (LISTBOX) EN LUGAR DEL BUSCADOR -->
+      <!-- SELECTOR (LISTBOX) -->
       <div class="selector-box">
-        <label for="selectModulo">Selecciona un módulo:</label>
+        <label for="selectModulo">Selecciona un módulo directamente:</label>
         <select id="selectModulo">
           <option value="">-- Ver todos los módulos --</option>
-          <!-- Las opciones se llenan con JavaScript -->
         </select>
       </div>
 
-      <!-- CARRUSEL CON MOVIMIENTO AUTOMÁTICO -->
+      <!-- BUSCADOR Y FILTROS EN TIEMPO REAL -->
+      <div class="search-filter-box">
+        <input type="text" id="searchInput" placeholder="🔍 Buscar por nombre, profesor o herramienta..." />
+        <select id="filtroProfesor">
+          <option value="">Todos los profesores</option>
+          <option value="Arcides Canales">Arcides Canales</option>
+          <option value="Javier Mineros">Javier Mineros</option>
+        </select>
+        <select id="filtroEstado">
+          <option value="">Todos los estados</option>
+          <option value="completado">Completados</option>
+          <option value="pendiente">Pendientes</option>
+        </select>
+      </div>
+
+      <!-- CARRUSEL -->
       <div class="carousel-container" id="carouselContainer">
         <button class="carousel-btn prev" onclick="moverCarrusel(-1)">&#10094;</button>
         <div class="carousel-track" id="listaModulos"></div>
@@ -311,6 +573,20 @@
       </div>
     </section>
 
+    <!-- QUIZ -->
+    <section id="quiz">
+      <h2>Quiz interactivo</h2>
+      <p class="intro">Pon a prueba lo que aprendiste. Recibirás retroalimentación inmediata.</p>
+      <div class="quiz-box">
+        <div class="quiz-pregunta" id="quizPregunta">Cargando pregunta...</div>
+        <div class="quiz-opciones" id="quizOpciones"></div>
+        <div class="quiz-feedback" id="quizFeedback"></div>
+        <button class="btn-quiz" id="btnSiguiente" disabled>Siguiente pregunta</button>
+        <div class="quiz-score" id="quizScore"></div>
+      </div>
+    </section>
+
+    <!-- ACUERDOS CON COMANDOS GIT -->
     <section id="acuerdos">
       <h2>Acuerdos de trabajo en GitHub</h2>
       <ul>
@@ -319,6 +595,30 @@
         <li>Nunca se suben contraseñas, claves, tokens ni datos personales.</li>
         <li>El repositorio es público: todo lo que suban lo puede ver cualquiera.</li>
       </ul>
+
+      <!-- COMANDOS PARA SUBIR A GIT -->
+      <div class="git-box">
+        <h3> Comandos para subir tu proyecto a GitHub</h3>
+        <div class="git-code">
+# 1. Inicializar el repositorio
+git init
+
+# 2. Agregar todos los archivos
+git add .
+
+# 3. Hacer el primer commit
+git commit -m "feat: primer commit del HUB 3DS-B"
+
+# 4. Cambiar el nombre de la rama a main
+git branch -M main
+
+# 5. Conectar con tu repositorio remoto (reemplaza la URL)
+git remote add origin https://github.com/tu-usuario/tu-repositorio.git
+
+# 6. Subir los cambios
+git push -u origin main
+        </div>
+      </div>
     </section>
 
   </main>
@@ -330,81 +630,76 @@
   <script>
     // ==== DATOS DE LOS MÓDULOS ====
     const modulos = [
-      {
-        nombre: "BTVDS 3.1 — Desarrollo de aplicaciones",
-        profesor: "Arcides Canales",
-        resumen: "Desarrollo de aplicaciones para resolver problemas reales usando Visual Studio, Windows Forms, .NET MAUI, ASPX y PrestaShop.",
-        herramientas: ["Visual Studio", "Windows Forms", ".NET MAUI", "ASPX", "PrestaShop", "Java"]
+      { id: 0, nombre: "BTVDS 3.1 — Desarrollo de aplicaciones", profesor: "Arcides Canales", resumen: "Desarrollo de aplicaciones para resolver problemas reales usando Visual Studio, Windows Forms, .NET MAUI, ASPX y PrestaShop.", herramientas: ["Visual Studio", "Windows Forms", ".NET MAUI", "ASPX", "PrestaShop", "Java"] },
+      { id: 1, nombre: "Módulo 2 — Componentes móviles", profesor: "Arcides Canales", resumen: "Creación de componentes y apps móviles, integrando interfaces y lógica para dispositivos.", herramientas: ["Visual Studio", ".NET MAUI", "Windows Forms"] },
+      { id: 2, nombre: "Módulo 3 — Inglés técnico", profesor: "Arcides Canales", resumen: "Práctica de conversación en inglés técnico aplicada al mantenimiento de sistemas informáticos.", herramientas: ["Inglés técnico", "Vocabulario", "Role-play"] },
+      { id: 3, nombre: "Módulo 4 — Empresa cooperativa", profesor: "Arcides Canales", resumen: "Emprendimiento y constitución de una empresa bajo modelo cooperativo: plan, organización y puesta en marcha.", herramientas: ["Plan de negocio", "Documentos", "Presentaciones"] },
+      { id: 4, nombre: "Módulo 3.8 — Proyecto innovador", profesor: "Javier Mineros", resumen: "Diseño y desarrollo de un proyecto innovador de software aplicando todo lo aprendido en el año.", herramientas: ["VS Code", "Python", "PHP", "IA"] },
+      { id: 5, nombre: "Módulo 3.4 — Documentación técnica", profesor: "Javier Mineros", resumen: "Documentación técnica de sistemas: manuales, diagramas, especificaciones y estándares.", herramientas: ["VS Code", "Markdown", "IA"] },
+      { id: 6, nombre: "Módulo 3.3 — Bases de Datos", profesor: "Javier Mineros", resumen: "Diseño, creación y administración de bases de datos relacionales con XAMPP y PHP.", herramientas: ["XAMPP", "MySQL", "PHP", "phpMyAdmin"] },
+      { id: 7, nombre: "Módulo 3.2 — Mantenimiento de sistemas", profesor: "Javier Mineros", resumen: "Mantenimiento preventivo y correctivo, respaldo y aseguramiento de la operación de sistemas.", herramientas: ["Avalonia", "Python", "XAMPP", "VS Code"] }
+    ];
+
+    // ==== PREGUNTAS DEL QUIZ (5 PREGUNTAS FÁCILES) ====
+    const preguntas = [
+      { 
+        pregunta: "¿Cuál es el nombre de este portal?", 
+        opciones: ["HUB 3DS·B", "Portal Web", "Sistema INDEL", "Repaso Anual"], 
+        correcta: 0, 
+        explicacion: "¡Correcto! El portal se llama HUB 3DS·B." 
       },
-      {
-        nombre: "Módulo 2 — Componentes móviles",
-        profesor: "Arcides Canales",
-        resumen: "Creación de componentes y apps móviles, integrando interfaces y lógica para dispositivos.",
-        herramientas: ["Visual Studio", ".NET MAUI", "Windows Forms"]
+      { 
+        pregunta: "¿Cuántos módulos se muestran en el Mapa del año?", 
+        opciones: ["5 módulos", "8 módulos", "10 módulos", "4 módulos"], 
+        correcta: 1, 
+        explicacion: "¡Exacto! En la página se muestran 8 módulos en total." 
       },
-      {
-        nombre: "Módulo 3 — Inglés técnico",
-        profesor: "Arcides Canales",
-        resumen: "Práctica de conversación en inglés técnico aplicada al mantenimiento de sistemas informáticos.",
-        herramientas: ["Inglés técnico", "Vocabulario", "Role-play"]
+      { 
+        pregunta: "¿Qué herramienta se usa para administrar bases de datos?", 
+        opciones: ["Windows Forms", "PHP", "XAMPP", "Avalonia"], 
+        correcta: 2, 
+        explicacion: "¡Bien! XAMPP se usa en el Módulo 3.3 de Bases de Datos." 
       },
-      {
-        nombre: "Módulo 4 — Empresa cooperativa",
-        profesor: "Arcides Canales",
-        resumen: "Emprendimiento y constitución de una empresa bajo modelo cooperativo: plan, organización y puesta en marcha.",
-        herramientas: ["Plan de negocio", "Documentos", "Presentaciones"]
+      { 
+        pregunta: "¿Qué lenguaje se agregó a las herramientas del Módulo 3.1?", 
+        opciones: ["Python", "Java", "C#", "PHP"], 
+        correcta: 1, 
+        explicacion: "¡Así es! Java fue agregado al Módulo 3.1." 
       },
-      {
-        nombre: "Módulo 3.8 — Proyecto innovador",
-        profesor: "Javier Mineros",
-        resumen: "Diseño y desarrollo de un proyecto innovador de software aplicando todo lo aprendido en el año.",
-        herramientas: ["VS Code", "Python", "PHP", "IA"]
-      },
-      {
-        nombre: "Módulo 3.4 — Documentación técnica",
-        profesor: "Javier Mineros",
-        resumen: "Documentación técnica de sistemas: manuales, diagramas, especificaciones y estándares.",
-        herramientas: ["VS Code", "Markdown", "IA"]
-      },
-      {
-        nombre: "Módulo 3.3 — Bases de Datos",
-        profesor: "Javier Mineros",
-        resumen: "Diseño, creación y administración de bases de datos relacionales con XAMPP y PHP.",
-        herramientas: ["XAMPP", "MySQL", "PHP", "phpMyAdmin"]
-      },
-      {
-        nombre: "Módulo 3.2 — Mantenimiento de sistemas",
-        profesor: "Javier Mineros",
-        resumen: "Mantenimiento preventivo y correctivo, respaldo y aseguramiento de la operación de sistemas.",
-        herramientas: ["Avalonia", "Python", "XAMPP", "VS Code"]
+      { 
+        pregunta: "¿Dónde se guarda tu progreso de repaso?", 
+        opciones: ["En una base de datos", "En el navegador", "En un archivo de texto", "Se pierde al cerrar"], 
+        correcta: 1, 
+        explicacion: "¡Correcto! El progreso se guarda en el navegador con localStorage." 
       }
     ];
 
     const lista = document.getElementById("listaModulos");
-    const selectModulo = document.getElementById("selectModulo");
     const container = document.getElementById("carouselContainer");
+    const searchInput = document.getElementById("searchInput");
+    const filtroProfesor = document.getElementById("filtroProfesor");
+    const filtroEstado = document.getElementById("filtroEstado");
+    const selectModulo = document.getElementById("selectModulo");
+    const progressBar = document.getElementById("progressBar");
+    const progresoTexto = document.getElementById("progresoTexto");
+    const quizPregunta = document.getElementById("quizPregunta");
+    const quizOpciones = document.getElementById("quizOpciones");
+    const quizFeedback = document.getElementById("quizFeedback");
+    const btnSiguiente = document.getElementById("btnSiguiente");
+    const quizScore = document.getElementById("quizScore");
 
-    // Renderizar las tarjetas en el carrusel
-    function renderizarTarjetas() {
-      lista.innerHTML = "";
-      modulos.forEach((m, index) => {
-        const card = document.createElement("article");
-        card.className = "card";
-        card.id = `card-${index}`; // ID único para poder ubicarla
-        card.innerHTML = `
-          <span class="tag">${m.profesor}</span>
-          <h3>${m.nombre}</h3>
-          <p>${m.resumen}</p>
-          <div class="tools">
-            <strong>Herramientas:</strong>
-            ${m.herramientas.join(" · ")}
-          </div>
-        `;
-        lista.appendChild(card);
-      });
+    let progreso = JSON.parse(localStorage.getItem("hubProgreso")) || {};
+
+    function guardarProgreso() { localStorage.setItem("hubProgreso", JSON.stringify(progreso)); }
+
+    function actualizarBarraProgreso() {
+      const total = modulos.length;
+      const completados = modulos.filter(m => progreso[m.id]).length;
+      progressBar.style.width = (completados / total) * 100 + "%";
+      progresoTexto.textContent = `${completados} / ${total}`;
     }
 
-    // Llenar el Listbox (Select) con los nombres de los módulos
+    // Llenar el Select (Listbox)
     function llenarSelect() {
       modulos.forEach((m, index) => {
         const option = document.createElement("option");
@@ -414,15 +709,58 @@
       });
     }
 
-    // Movimiento manual con flechas
-    function moverCarrusel(direccion) {
-      const scrollAmount = 360 * direccion;
-      lista.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+    function renderizarTarjetas() {
+      const query = searchInput.value.toLowerCase().trim();
+      const profFiltro = filtroProfesor.value;
+      const estadoFiltro = filtroEstado.value;
+
+      const filtrados = modulos.filter(m => {
+        const coincideBusqueda = m.nombre.toLowerCase().includes(query) || m.profesor.toLowerCase().includes(query) || m.resumen.toLowerCase().includes(query) || m.herramientas.join(" ").toLowerCase().includes(query);
+        const coincideProfesor = profFiltro === "" || m.profesor === profFiltro;
+        const estaCompletado = !!progreso[m.id];
+        const coincideEstado = estadoFiltro === "" || (estadoFiltro === "completado" && estaCompletado) || (estadoFiltro === "pendiente" && !estaCompletado);
+        return coincideBusqueda && coincideProfesor && coincideEstado;
+      });
+
+      lista.innerHTML = "";
+      if (filtrados.length === 0) {
+        lista.innerHTML = "<p style='color:var(--muted); padding: 1rem; width: 100%;'>No se encontraron módulos con esos filtros.</p>";
+        return;
+      }
+
+      filtrados.forEach(m => {
+        const completado = !!progreso[m.id];
+        const card = document.createElement("article");
+        card.className = "card";
+        card.id = `card-${m.id}`;
+        card.innerHTML = `
+          <span class="tag">${m.profesor}</span>
+          <h3>${m.nombre}</h3>
+          <p>${m.resumen}</p>
+          <div class="tools">
+            <strong>Herramientas:</strong>
+            ${m.herramientas.join(" · ")}
+          </div>
+          <button class="btn-progreso ${completado ? 'completado' : ''}" onclick="toggleProgreso(${m.id})">
+            ${completado ? '✓ Completado' : 'Marcar como completado'}
+          </button>
+        `;
+        lista.appendChild(card);
+      });
     }
 
-    // ==== MOVIMIENTO AUTOMÁTICO ====
-    let autoScrollInterval;
+    function toggleProgreso(id) {
+      progreso[id] = !progreso[id];
+      guardarProgreso();
+      actualizarBarraProgreso();
+      renderizarTarjetas();
+    }
 
+    function moverCarrusel(direccion) {
+      lista.scrollBy({ left: 360 * direccion, behavior: 'smooth' });
+    }
+
+    let autoScrollInterval;
     function iniciarAutoScroll() {
       autoScrollInterval = setInterval(() => {
         if (lista.scrollLeft + lista.clientWidth >= lista.scrollWidth - 10) {
@@ -432,49 +770,110 @@
         }
       }, 3000);
     }
+    function detenerAutoScroll() { clearInterval(autoScrollInterval); }
 
-    function detenerAutoScroll() {
-      clearInterval(autoScrollInterval);
-    }
-
-    // Pausar al pasar el mouse o tocar
     container.addEventListener("mouseenter", detenerAutoScroll);
     container.addEventListener("mouseleave", iniciarAutoScroll);
     container.addEventListener("touchstart", detenerAutoScroll, {passive: true});
     container.addEventListener("touchend", iniciarAutoScroll, {passive: true});
 
-    // ==== EVENTO DEL SELECTOR ====
+    searchInput.addEventListener("input", renderizarTarjetas);
+    filtroProfesor.addEventListener("change", renderizarTarjetas);
+    filtroEstado.addEventListener("change", renderizarTarjetas);
+
+    // Evento del Select para mover el carrusel
     selectModulo.addEventListener("change", (e) => {
       const index = e.target.value;
-      
       if (index === "") {
-        // Si selecciona "Ver todos", reiniciamos el carrusel al inicio y dejamos que siga
         detenerAutoScroll();
         lista.scrollTo({ left: 0, behavior: 'smooth' });
         setTimeout(iniciarAutoScroll, 1000); 
         return;
       }
-
-      // Pausar el auto-scroll para que el usuario pueda leer
       detenerAutoScroll();
+      // Buscamos la tarjeta (limpiamos filtros primero)
+      searchInput.value = "";
+      filtroProfesor.value = "";
+      filtroEstado.value = "";
+      renderizarTarjetas();
 
-      // Buscar la tarjeta seleccionada y mover el carrusel hasta ella
       const targetCard = document.getElementById(`card-${index}`);
       if (targetCard) {
-        // Calcula la posición de la tarjeta dentro del contenedor
         const scrollPosition = targetCard.offsetLeft - lista.offsetLeft - 20; 
         lista.scrollTo({ left: scrollPosition, behavior: 'smooth' });
-        
-        // Efecto visual para resaltar la tarjeta seleccionada
-        document.querySelectorAll('.card').forEach(c => c.style.borderColor = 'var(--border)');
+        document.querySelectorAll('.card').forEach(c => {
+          c.style.borderColor = 'var(--border)';
+          c.style.boxShadow = 'none';
+        });
         targetCard.style.borderColor = 'var(--accent)';
         targetCard.style.boxShadow = '0 0 25px var(--accent-glow)';
       }
     });
 
-    // Inicializar todo
-    renderizarTarjetas();
+    // Lógica del Quiz
+    let indicePregunta = 0, puntaje = 0, respondida = false;
+
+    function cargarPregunta() {
+      respondida = false;
+      const p = preguntas[indicePregunta];
+      quizPregunta.textContent = `Pregunta ${indicePregunta + 1}/${preguntas.length}: ${p.pregunta}`;
+      quizOpciones.innerHTML = "";
+      quizFeedback.className = "quiz-feedback";
+      quizFeedback.textContent = "";
+      btnSiguiente.disabled = true;
+      btnSiguiente.textContent = indicePregunta === preguntas.length - 1 ? "Ver resultados" : "Siguiente pregunta";
+
+      p.opciones.forEach((opcion, index) => {
+        const btn = document.createElement("button");
+        btn.className = "quiz-opcion";
+        btn.textContent = opcion;
+        btn.onclick = () => seleccionarRespuesta(index);
+        quizOpciones.appendChild(btn);
+      });
+    }
+
+    function seleccionarRespuesta(index) {
+      if (respondida) return;
+      respondida = true;
+      const p = preguntas[indicePregunta];
+      const botones = quizOpciones.querySelectorAll(".quiz-opcion");
+      botones.forEach((b, i) => {
+        b.disabled = true;
+        if (i === p.correcta) b.classList.add("correcta");
+        if (i === index && index !== p.correcta) b.classList.add("incorrecta");
+      });
+
+      if (index === p.correcta) {
+        puntaje++;
+        quizFeedback.className = "quiz-feedback correcta";
+        quizFeedback.textContent = "✅ " + p.explicacion;
+      } else {
+        quizFeedback.className = "quiz-feedback incorrecta";
+        quizFeedback.textContent = `❌ Incorrecto. La respuesta correcta es: "${p.opciones[p.correcta]}". ${p.explicacion}`;
+      }
+      btnSiguiente.disabled = false;
+      quizScore.textContent = `Puntaje actual: ${puntaje} / ${preguntas.length}`;
+    }
+
+    btnSiguiente.addEventListener("click", () => {
+      if (indicePregunta < preguntas.length - 1) {
+        indicePregunta++;
+        cargarPregunta();
+      } else {
+        quizPregunta.textContent = "🎉 ¡Quiz completado!";
+        quizOpciones.innerHTML = "";
+        quizFeedback.className = "quiz-feedback correcta";
+        quizFeedback.textContent = `Obtuviste ${puntaje} de ${preguntas.length} respuestas correctas. ${puntaje === preguntas.length ? '¡Eres un experto!' : '¡Sigue repasando!'}`;
+        btnSiguiente.disabled = true;
+        quizScore.textContent = `Resultado final: ${puntaje} / ${preguntas.length}`;
+      }
+    });
+
+    // Inicializar
     llenarSelect();
+    renderizarTarjetas();
+    actualizarBarraProgreso();
+    cargarPregunta();
     iniciarAutoScroll();
   </script>
 </body>
