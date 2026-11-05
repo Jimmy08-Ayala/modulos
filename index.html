@@ -68,16 +68,16 @@
     nav {
       display: flex;
       justify-content: center;
-      gap: 1.5rem;
+      gap: 1rem;
       margin-top: 1.5rem;
       flex-wrap: wrap;
     }
     nav a {
       color: var(--accent);
       text-decoration: none;
-      font-size: 1rem;
+      font-size: 0.9rem;
       font-weight: 600;
-      padding: .5rem 1.2rem;
+      padding: .5rem 1rem;
       border-radius: 4px;
       border: 1px solid var(--border);
       background: rgba(0, 243, 255, 0.05);
@@ -104,9 +104,7 @@
     .intro { color: var(--muted); margin-bottom: 2rem; font-size: 1.1rem; }
 
     /* === SELECTOR Y BUSCADOR === */
-    .selector-box {
-      margin-bottom: 1.5rem;
-    }
+    .selector-box { margin-bottom: 1.5rem; }
     .selector-box label {
       display: block;
       font-family: 'Orbitron', sans-serif;
@@ -116,17 +114,16 @@
       letter-spacing: 1px;
       margin-bottom: 0.5rem;
     }
-    .selector-box select {
+    .selector-box select, .search-filter-box select, .search-filter-box input {
       width: 100%;
       padding: 1rem 1.2rem;
       background: rgba(15, 23, 42, 0.8);
       border: 1px solid var(--border);
       border-radius: 8px;
-      font-size: 1.1rem;
+      font-size: 1rem;
       color: var(--text);
       font-family: 'Rajdhani', sans-serif;
       outline: none;
-      cursor: pointer;
       transition: all 0.3s ease;
       appearance: none;
       background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%2300f3ff%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
@@ -134,15 +131,13 @@
       background-position: right 1rem center;
       background-size: 0.8em;
     }
-    .selector-box select:focus, .selector-box select:hover {
+    .search-filter-box input {
+      background-image: none;
+    }
+    .selector-box select:focus, .search-filter-box input:focus, .search-filter-box select:focus {
       border-color: var(--accent);
       box-shadow: 0 0 15px var(--accent-glow);
     }
-    .selector-box select option {
-      background: #0f172a;
-      color: var(--text);
-    }
-
     .search-filter-box {
       display: flex;
       gap: 1rem;
@@ -154,37 +149,10 @@
       border: 1px solid var(--border);
       backdrop-filter: blur(10px);
     }
-    .search-filter-box input, .search-filter-box select {
-      flex: 1;
-      min-width: 200px;
-      padding: 1rem 1.2rem;
-      background: rgba(0, 0, 0, 0.3);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      font-size: 1rem;
-      color: var(--text);
-      font-family: 'Rajdhani', sans-serif;
-      outline: none;
-      transition: all 0.3s ease;
-    }
-    .search-filter-box input:focus, .search-filter-box select:focus {
-      border-color: var(--accent);
-      box-shadow: 0 0 15px var(--accent-glow);
-    }
-    .search-filter-box select {
-      cursor: pointer;
-      appearance: none;
-      background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%2300f3ff%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
-      background-repeat: no-repeat;
-      background-position: right 1rem center;
-      background-size: 0.8em;
-    }
-    .search-filter-box select option {
-      background: #0f172a;
-      color: var(--text);
-    }
+    .search-filter-box input, .search-filter-box select { flex: 1; min-width: 200px; }
+    .search-filter-box option { background: #0f172a; }
 
-    /* === BOTÓN DE ALTERNAR VISTA === */
+    /* === BOTONES DE VISTA === */
     .view-toggle {
       display: flex;
       justify-content: flex-end;
@@ -204,10 +172,7 @@
       letter-spacing: 1px;
       transition: all 0.3s ease;
     }
-    .btn-view:hover {
-      border-color: var(--accent);
-      color: var(--accent);
-    }
+    .btn-view:hover { border-color: var(--accent); color: var(--accent); }
     .btn-view.activo {
       background: var(--accent);
       color: var(--bg);
@@ -215,11 +180,8 @@
       box-shadow: 0 0 10px var(--accent-glow);
     }
 
-    /* === ESTILOS DEL CARRUSEL === */
-    .carousel-container {
-      position: relative;
-      padding: 0 40px;
-    }
+    /* === CARRUSEL === */
+    .carousel-container { position: relative; padding: 0 40px; }
     .carousel-track {
       display: flex;
       gap: 1.5rem;
@@ -228,10 +190,7 @@
       padding: 1.5rem 0.5rem;
       scrollbar-width: none;
     }
-    .carousel-track::-webkit-scrollbar {
-      display: none;
-    }
-    
+    .carousel-track::-webkit-scrollbar { display: none; }
     .card {
       flex: 0 0 340px; 
       background: var(--card);
@@ -257,10 +216,9 @@
     .card:hover {
       transform: translateY(-8px);
       border-color: var(--border-hover);
-      box-shadow: 0 10px 30px rgba(0, 243, 255, 0.15), inset 0 0 20px rgba(0, 243, 255, 0.05);
+      box-shadow: 0 10px 30px rgba(0, 243, 255, 0.15);
     }
     .card:hover::before { transform: scaleX(1); }
-    
     .card .tag {
       display: inline-block;
       font-size: .8rem;
@@ -273,11 +231,9 @@
       margin-bottom: .8rem;
       width: fit-content;
       text-transform: uppercase;
-      letter-spacing: 1px;
     }
     .card h3 { font-size: 1.1rem; margin-bottom: .5rem; color: #fff; }
     .card p { font-size: 0.95rem; color: var(--muted); margin-bottom: 1rem; }
-    
     .card .tools {
       font-size: .9rem;
       color: var(--accent);
@@ -289,7 +245,6 @@
       margin-bottom: 1rem;
     }
     .card .tools strong { display: block; margin-bottom: .3rem; color: #fff; font-family: 'Orbitron', sans-serif; font-size: 0.85rem; }
-
     .btn-progreso {
       width: 100%;
       padding: 0.8rem;
@@ -301,22 +256,11 @@
       font-weight: 700;
       font-family: 'Orbitron', sans-serif;
       text-transform: uppercase;
-      letter-spacing: 1px;
       transition: all 0.3s ease;
       font-size: 0.85rem;
     }
-    .btn-progreso:hover {
-      background: var(--accent);
-      color: var(--bg);
-      box-shadow: 0 0 15px var(--accent-glow);
-    }
-    .btn-progreso.completado {
-      background: var(--success);
-      border-color: var(--success);
-      color: #fff;
-      box-shadow: 0 0 15px rgba(34, 197, 94, 0.5);
-    }
-
+    .btn-progreso:hover { background: var(--accent); color: var(--bg); }
+    .btn-progreso.completado { background: var(--success); border-color: var(--success); color: #fff; }
     .carousel-btn {
       position: absolute;
       top: 50%;
@@ -328,46 +272,30 @@
       height: 40px;
       border-radius: 50%;
       font-size: 1.5rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
       cursor: pointer;
       z-index: 10;
       transition: all 0.3s ease;
-      backdrop-filter: blur(5px);
     }
-    .carousel-btn:hover {
-      background: var(--accent);
-      color: var(--bg);
-      box-shadow: 0 0 15px var(--accent-glow);
-    }
+    .carousel-btn:hover { background: var(--accent); color: var(--bg); }
     .carousel-btn.prev { left: -10px; }
     .carousel-btn.next { right: -10px; }
 
-    /* === NUEVA VISTA DE LISTA === */
+    /* === VISTA DE LISTA === */
     .lista-container {
-      display: none; /* Oculto por defecto */
+      display: none;
       background: var(--card);
       border: 1px solid var(--border);
       border-radius: 12px;
       padding: 1.5rem;
-      backdrop-filter: blur(10px);
       overflow-x: auto;
     }
-    .lista-container.visible {
-      display: block;
-    }
-    .tabla-modulos {
-      width: 100%;
-      border-collapse: collapse;
-      min-width: 800px;
-    }
+    .lista-container.visible { display: block; }
+    .tabla-modulos { width: 100%; border-collapse: collapse; min-width: 800px; }
     .tabla-modulos th {
       font-family: 'Orbitron', sans-serif;
       color: var(--accent);
       font-size: 0.85rem;
       text-transform: uppercase;
-      letter-spacing: 1px;
       padding: 1rem;
       text-align: left;
       border-bottom: 2px solid var(--border);
@@ -376,30 +304,14 @@
       padding: 1rem;
       border-bottom: 1px solid rgba(0, 243, 255, 0.1);
       font-size: 0.95rem;
-      vertical-align: top;
     }
-    .tabla-modulos tr:hover td {
-      background: rgba(0, 243, 255, 0.05);
-    }
-    .tabla-modulos td:first-child {
-      color: #fff;
-      font-weight: 600;
-      font-family: 'Orbitron', sans-serif;
-      font-size: 0.9rem;
-    }
-    .tabla-modulos td:nth-child(2) {
-      color: var(--accent);
-      font-weight: 600;
-    }
-    .tabla-modulos td:nth-child(3) {
-      color: var(--muted);
-    }
-    .tabla-modulos td:nth-child(4) {
-      color: #a5f3fc;
-      font-style: italic;
-    }
+    .tabla-modulos tr:hover td { background: rgba(0, 243, 255, 0.05); }
+    .tabla-modulos td:first-child { color: #fff; font-weight: 600; font-family: 'Orbitron', sans-serif; font-size: 0.9rem; }
+    .tabla-modulos td:nth-child(2) { color: var(--accent); }
+    .tabla-modulos td:nth-child(3) { color: var(--muted); }
+    .tabla-modulos td:nth-child(4) { color: #a5f3fc; font-style: italic; }
 
-    /* === BARRA DE PROGRESO GLOBAL === */
+    /* === PROGRESO === */
     .progress-container {
       margin-bottom: 2rem;
       background: rgba(15, 23, 42, 0.5);
@@ -429,20 +341,182 @@
       background: linear-gradient(90deg, var(--accent), #9333ea);
       border-radius: 6px;
       transition: width 0.5s ease;
-      box-shadow: 0 0 10px var(--accent-glow);
     }
 
-    /* === QUIZ INTERACTIVO === */
+    /* === FLASHCARDS === */
+    .flashcards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+    .flashcard {
+      perspective: 1000px;
+      height: 220px;
+      cursor: pointer;
+    }
+    .flashcard-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      transition: transform 0.6s;
+      transform-style: preserve-3d;
+    }
+    .flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
+    .flashcard-front, .flashcard-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      border-radius: 12px;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      border: 1px solid var(--border);
+      backdrop-filter: blur(10px);
+    }
+    .flashcard-front {
+      background: var(--card);
+      color: var(--accent);
+      font-family: 'Orbitron', sans-serif;
+    }
+    .flashcard-back {
+      background: linear-gradient(135deg, #0f172a, #1e293b);
+      color: var(--text);
+      transform: rotateY(180deg);
+      font-size: 0.95rem;
+    }
+    .flashcard-front h4 { font-size: 1.1rem; margin-bottom: 0.5rem; }
+    .flashcard-front p { font-size: 0.9rem; color: var(--muted); font-family: 'Rajdhani', sans-serif; }
+
+    /* === LÍNEA DE TIEMPO === */
+    .timeline {
+      position: relative;
+      padding: 2rem 0;
+    }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 2px;
+      height: 100%;
+      background: linear-gradient(180deg, var(--accent), transparent);
+    }
+    .timeline-item {
+      position: relative;
+      width: 50%;
+      padding: 1rem 2rem;
+      animation: fadeSlide 0.6s ease forwards;
+      opacity: 0;
+    }
+    .timeline-item:nth-child(odd) { left: 0; text-align: right; }
+    .timeline-item:nth-child(even) { left: 50%; text-align: left; }
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      top: 1.5rem;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 15px var(--accent-glow);
+    }
+    .timeline-item:nth-child(odd)::before { right: -8px; }
+    .timeline-item:nth-child(even)::before { left: -8px; }
+    .timeline-content {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1rem;
+      backdrop-filter: blur(10px);
+    }
+    .timeline-content h4 { color: var(--accent); font-size: 1rem; margin-bottom: 0.3rem; font-family: 'Orbitron', sans-serif;}
+    .timeline-content p { color: var(--muted); font-size: 0.9rem; }
+    @keyframes fadeSlide {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .timeline-item.visible { animation-play-state: running; }
+
+    /* === NUBE DE TECNOLOGÍAS === */
+    .tech-cloud {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      justify-content: center;
+      padding: 2rem;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+    }
+    .tech-tag {
+      padding: 0.5rem 1.2rem;
+      background: rgba(0, 243, 255, 0.1);
+      border: 1px solid var(--border);
+      border-radius: 50px;
+      color: var(--accent);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-weight: 600;
+      font-size: 0.95rem;
+      user-select: none;
+    }
+    .tech-tag:hover {
+      background: var(--accent);
+      color: var(--bg);
+      transform: scale(1.1);
+      box-shadow: 0 0 15px var(--accent-glow);
+    }
+    .tech-tag.activo {
+      background: var(--accent);
+      color: var(--bg);
+      box-shadow: 0 0 15px var(--accent-glow);
+    }
+
+    /* === LOGROS === */
+    .logros-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 1.2rem;
+    }
+    .logro {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem 1rem;
+      text-align: center;
+      transition: all 0.3s ease;
+      opacity: 0.4;
+      filter: grayscale(100%);
+    }
+    .logro.desbloqueado {
+      opacity: 1;
+      filter: grayscale(0%);
+      border-color: var(--accent);
+      box-shadow: 0 0 20px var(--accent-glow);
+    }
+    .logro-icono { font-size: 2.5rem; margin-bottom: 0.5rem; }
+    .logro-nombre {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.9rem;
+      color: #fff;
+      margin-bottom: 0.3rem;
+    }
+    .logro-desc { font-size: 0.8rem; color: var(--muted); }
+
+    /* === QUIZ === */
     .quiz-box {
       background: var(--card);
       border: 1px solid var(--border);
       border-radius: 12px;
       padding: 2rem;
-      backdrop-filter: blur(10px);
     }
     .quiz-pregunta {
       font-family: 'Orbitron', sans-serif;
-      font-size: 1.3rem;
+      font-size: 1.2rem;
       margin-bottom: 1.5rem;
       color: #fff;
     }
@@ -460,54 +534,23 @@
       cursor: pointer;
       transition: all 0.3s ease;
       color: var(--text);
-      font-size: 1rem;
       text-align: left;
       font-family: 'Rajdhani', sans-serif;
+      font-size: 1rem;
     }
-    .quiz-opcion:hover {
-      border-color: var(--accent);
-      background: rgba(0, 243, 255, 0.05);
-    }
-    .quiz-opcion.correcta {
-      background: rgba(34, 197, 94, 0.2);
-      border-color: var(--success);
-      color: #fff;
-      box-shadow: 0 0 15px rgba(34, 197, 94, 0.3);
-    }
-    .quiz-opcion.incorrecta {
-      background: rgba(239, 68, 68, 0.2);
-      border-color: var(--error);
-      color: #fff;
-      box-shadow: 0 0 15px rgba(239, 68, 68, 0.3);
-    }
-    .quiz-opcion:disabled {
-      cursor: not-allowed;
-      opacity: 0.8;
-    }
+    .quiz-opcion:hover { border-color: var(--accent); background: rgba(0, 243, 255, 0.05); }
+    .quiz-opcion.correcta { background: rgba(34, 197, 94, 0.2); border-color: var(--success); color: #fff; }
+    .quiz-opcion.incorrecta { background: rgba(239, 68, 68, 0.2); border-color: var(--error); color: #fff; }
+    .quiz-opcion:disabled { cursor: not-allowed; opacity: 0.8; }
     .quiz-feedback {
       padding: 1rem;
       border-radius: 8px;
       margin-bottom: 1.5rem;
       font-weight: 600;
       display: none;
-      animation: fadeIn 0.4s ease;
     }
-    .quiz-feedback.correcta {
-      display: block;
-      background: rgba(34, 197, 94, 0.15);
-      border: 1px solid var(--success);
-      color: var(--success);
-    }
-    .quiz-feedback.incorrecta {
-      display: block;
-      background: rgba(239, 68, 68, 0.15);
-      border: 1px solid var(--error);
-      color: var(--error);
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(-10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+    .quiz-feedback.correcta { display: block; background: rgba(34, 197, 94, 0.15); border: 1px solid var(--success); color: var(--success); }
+    .quiz-feedback.incorrecta { display: block; background: rgba(239, 68, 68, 0.15); border: 1px solid var(--error); color: var(--error); }
     .btn-quiz {
       padding: 1rem 2rem;
       background: transparent;
@@ -518,18 +561,10 @@
       font-weight: 700;
       font-family: 'Orbitron', sans-serif;
       text-transform: uppercase;
-      letter-spacing: 1px;
       transition: all 0.3s ease;
     }
-    .btn-quiz:hover:not(:disabled) {
-      background: var(--accent);
-      color: var(--bg);
-      box-shadow: 0 0 20px var(--accent-glow);
-    }
-    .btn-quiz:disabled {
-      opacity: 0.3;
-      cursor: not-allowed;
-    }
+    .btn-quiz:hover:not(:disabled) { background: var(--accent); color: var(--bg); }
+    .btn-quiz:disabled { opacity: 0.3; cursor: not-allowed; }
     .quiz-score {
       margin-top: 1.5rem;
       font-family: 'Orbitron', sans-serif;
@@ -538,7 +573,7 @@
       font-size: 1.1rem;
     }
 
-    /* === ACUERDOS Y COMANDOS GIT === */
+    /* === GIT === */
     .git-box {
       background: rgba(0, 0, 0, 0.4);
       border-radius: 8px;
@@ -546,11 +581,7 @@
       margin-top: 1.5rem;
       border-left: 3px solid var(--accent);
     }
-    .git-box h3 {
-      font-size: 1.1rem;
-      color: var(--accent);
-      margin-bottom: 1rem;
-    }
+    .git-box h3 { font-size: 1.1rem; color: var(--accent); margin-bottom: 1rem; }
     .git-code {
       font-family: 'Courier New', monospace;
       background: rgba(15, 23, 42, 0.8);
@@ -563,18 +594,9 @@
       border: 1px solid var(--border);
       white-space: pre;
     }
-
     ul { color: var(--muted); padding-left: 1.5rem; }
     li { margin-bottom: 0.8rem; }
-    code {
-      background: rgba(0, 243, 255, 0.1);
-      color: var(--accent);
-      padding: .2rem .4rem;
-      border-radius: 4px;
-      font-family: monospace;
-      font-size: 0.95rem;
-    }
-
+    code { background: rgba(0, 243, 255, 0.1); color: var(--accent); padding: .2rem .4rem; border-radius: 4px; }
     footer {
       text-align: center;
       padding: 2rem;
@@ -583,7 +605,6 @@
       border-top: 1px solid var(--border);
       font-family: 'Orbitron', sans-serif;
       letter-spacing: 2px;
-      background: rgba(2, 6, 23, 0.8);
     }
 
     @media (max-width: 600px) {
@@ -592,6 +613,9 @@
       .carousel-container { padding: 0; }
       .carousel-btn { display: none; }
       .card { flex: 0 0 280px; }
+      .timeline::before { left: 20px; }
+      .timeline-item { width: 100%; left: 0 !important; text-align: left !important; padding-left: 3rem; padding-right: 0; }
+      .timeline-item::before { left: 12px !important; right: auto !important; }
     }
   </style>
 </head>
@@ -602,9 +626,12 @@
     <p>Portal de repaso · 3.º Bachillerato Técnico Vocacional en Desarrollo de Software «B» · INDEL</p>
     <nav>
       <a href="#modulos">Módulos</a>
-      <a href="#progreso">Progreso</a>
+      <a href="#flashcards">Flashcards</a>
+      <a href="#timeline">Línea de Tiempo</a>
+      <a href="#nube">Tecnologías</a>
+      <a href="#logros">Logros</a>
       <a href="#quiz">Quiz</a>
-      <a href="#acuerdos">Acuerdos GitHub</a>
+      <a href="#acuerdos">GitHub</a>
     </nav>
   </header>
 
@@ -616,7 +643,7 @@
       <div class="progress-container">
         <div class="progress-header">
           <span>Módulos completados</span>
-          <span id="progresoTexto">0 / 8</span>
+          <span id="progresoTexto">0 / 9</span>
         </div>
         <div class="progress-bar-bg">
           <div class="progress-bar-fill" id="progressBar"></div>
@@ -624,11 +651,11 @@
       </div>
     </section>
 
+    <!-- MÓDULOS -->
     <section id="modulos">
       <h2>Mapa del año</h2>
       <p class="intro">Selecciona un módulo de la lista, usa el buscador o filtra en tiempo real. Marca los módulos como completados para guardar tu progreso.</p>
 
-      <!-- SELECTOR (LISTBOX) -->
       <div class="selector-box">
         <label for="selectModulo">Selecciona un módulo directamente:</label>
         <select id="selectModulo">
@@ -636,7 +663,6 @@
         </select>
       </div>
 
-      <!-- BUSCADOR Y FILTROS EN TIEMPO REAL -->
       <div class="search-filter-box">
         <input type="text" id="searchInput" placeholder="🔍 Buscar por nombre, profesor o herramienta..." />
         <select id="filtroProfesor">
@@ -651,20 +677,17 @@
         </select>
       </div>
 
-      <!-- BOTONES PARA CAMBIAR DE VISTA -->
       <div class="view-toggle">
         <button class="btn-view activo" id="btnVistaCarrusel" onclick="cambiarVista('carrusel')"> Carrusel</button>
         <button class="btn-view" id="btnVistaLista" onclick="cambiarVista('lista')"> Ver Lista Detallada</button>
       </div>
 
-      <!-- CARRUSEL -->
       <div class="carousel-container" id="carouselContainer">
         <button class="carousel-btn prev" onclick="moverCarrusel(-1)">&#10094;</button>
         <div class="carousel-track" id="listaModulos"></div>
         <button class="carousel-btn next" onclick="moverCarrusel(1)">&#10095;</button>
       </div>
 
-      <!-- NUEVA VISTA DE LISTA -->
       <div class="lista-container" id="vistaLista">
         <table class="tabla-modulos">
           <thead>
@@ -675,17 +698,43 @@
               <th>Lo Aprendido</th>
             </tr>
           </thead>
-          <tbody id="cuerpoTabla">
-            <!-- Se llena con JavaScript -->
-          </tbody>
+          <tbody id="cuerpoTabla"></tbody>
         </table>
       </div>
+    </section>
+
+    <!-- FLASHCARDS -->
+    <section id="flashcards">
+      <h2>Flashcards de repaso</h2>
+      <p class="intro">Haz clic en cada tarjeta para voltearla y revelar la respuesta.</p>
+      <div class="flashcards-grid" id="flashcardsGrid"></div>
+    </section>
+
+    <!-- LÍNEA DE TIEMPO -->
+    <section id="timeline">
+      <h2>Línea de tiempo del año</h2>
+      <p class="intro">Un recorrido visual por los hitos más importantes del año.</p>
+      <div class="timeline" id="timelineContainer"></div>
+    </section>
+
+    <!-- NUBE DE TECNOLOGÍAS -->
+    <section id="nube">
+      <h2>Nube de tecnologías</h2>
+      <p class="intro">Haz clic en una tecnología para filtrar los módulos que la usan.</p>
+      <div class="tech-cloud" id="techCloud"></div>
+    </section>
+
+    <!-- LOGROS -->
+    <section id="logros">
+      <h2>Logros y insignias</h2>
+      <p class="intro">Desbloquea insignias marcando módulos como completados.</p>
+      <div class="logros-grid" id="logrosGrid"></div>
     </section>
 
     <!-- QUIZ -->
     <section id="quiz">
       <h2>Quiz interactivo</h2>
-      <p class="intro">Pon a prueba lo que aprendiste. Recibirás retroalimentación inmediata.</p>
+      <p class="intro">Pon a prueba lo que aprendiste. Recibirás retroalimentación inmediata. Son 15 preguntas en total.</p>
       <div class="quiz-box">
         <div class="quiz-pregunta" id="quizPregunta">Cargando pregunta...</div>
         <div class="quiz-opciones" id="quizOpciones"></div>
@@ -695,7 +744,7 @@
       </div>
     </section>
 
-    <!-- ACUERDOS CON COMANDOS GIT -->
+    <!-- ACUERDOS -->
     <section id="acuerdos">
       <h2>Acuerdos de trabajo en GitHub</h2>
       <ul>
@@ -705,7 +754,6 @@
         <li>El repositorio es público: todo lo que suban lo puede ver cualquiera.</li>
       </ul>
 
-      <!-- COMANDOS PARA SUBIR A GIT -->
       <div class="git-box">
         <h3> Comandos para subir tu proyecto a GitHub</h3>
         <div class="git-code">
@@ -737,26 +785,71 @@ git push -u origin main
   </footer>
 
   <script>
-    // ==== DATOS DE LOS MÓDULOS (SE MANTIENEN INTACTOS) ====
+    // ==== DATOS DE LOS MÓDULOS ====
     const modulos = [
-      { id: 0, nombre: "BTVDS 3.1 — Desarrollo de aplicaciones", profesor: "Arcides Canales", resumen: "Desarrollo de aplicaciones para resolver problemas reales usando Visual Studio, Windows Forms, .NET MAUI, ASPX y PrestaShop.", herramientas: ["Visual Studio", "Windows Forms", ".NET MAUI", "ASPX", "PrestaShop", "Java"], aprendido: "Desarrollo de software a la medida, interfaces de usuario y lógica de negocios." },
-      { id: 1, nombre: "Módulo 2 — Componentes móviles", profesor: "Arcides Canales", resumen: "Creación de componentes y apps móviles, integrando interfaces y lógica para dispositivos.", herramientas: ["Visual Studio", ".NET MAUI", "Windows Forms"], aprendido: "Creación de apps para celulares y adaptación de interfaces a dispositivos móviles." },
-      { id: 2, nombre: "Módulo 3 — Inglés técnico", profesor: "Arcides Canales", resumen: "Práctica de conversación en inglés técnico aplicada al mantenimiento de sistemas informáticos.", herramientas: ["Inglés técnico", "Vocabulario", "Role-play"], aprendido: "Comunicación oral y escrita en inglés enfocada a soporte técnico y sistemas." },
-      { id: 3, nombre: "Módulo 4 — Empresa cooperativa", profesor: "Arcides Canales", resumen: "Emprendimiento y constitución de una empresa bajo modelo cooperativo: plan, organización y puesta en marcha.", herramientas: ["Plan de negocio", "Documentos", "Presentaciones"], aprendido: "Cómo crear y organizar una cooperativa, planes de negocio y trabajo en equipo." },
-      { id: 4, nombre: "Módulo 3.8 — Proyecto innovador", profesor: "Javier Mineros", resumen: "Diseño y desarrollo de un proyecto innovador de software aplicando todo lo aprendido en el año.", herramientas: ["VS Code", "Python", "PHP", "IA"], aprendido: "Gestión de proyectos reales, innovación y uso de IA como apoyo al desarrollo." },
-      { id: 5, nombre: "Módulo 3.4 — Documentación técnica", profesor: "Javier Mineros", resumen: "Documentación técnica de sistemas: manuales, diagramas, especificaciones y estándares.", herramientas: ["VS Code", "Markdown", "IA"], aprendido: "Redacción de manuales, diagramas de flujo y documentación de sistemas." },
-      { id: 6, nombre: "Módulo 3.3 — Bases de Datos", profesor: "Javier Mineros", resumen: "Diseño, creación y administración de bases de datos relacionales con XAMPP y PHP.", herramientas: ["XAMPP", "MySQL", "PHP", "phpMyAdmin"], aprendido: "Modelado de datos, consultas SQL y administración de bases de datos MySQL." },
-      { id: 7, nombre: "Módulo 3.2 — Mantenimiento de sistemas", profesor: "Javier Mineros", resumen: "Mantenimiento preventivo y correctivo, respaldo y aseguramiento de la operación de sistemas.", herramientas: ["Avalonia", "Python", "XAMPP", "VS Code"], aprendido: "Diagnóstico de fallas, mantenimiento de software y respaldo de información." }
+      { id: 0, nombre: "Módulo 3.0 — Orientación de estudiantes", profesor: "Javier Mineros", resumen: "Orientación de estudiantes al proceso educativo del tercer año.", herramientas: ["Orientación", "Proceso educativo", "Acompañamiento"], aprendido: "Acompañamiento y orientación en el proceso educativo del último año." },
+      { id: 1, nombre: "BTVDS 3.1 — Desarrollo de aplicaciones", profesor: "Arcides Canales", resumen: "Desarrollo de aplicaciones para resolver problemas reales usando Visual Studio, Windows Forms, .NET MAUI, ASPX y PrestaShop.", herramientas: ["Visual Studio", "Windows Forms", ".NET MAUI", "ASPX", "PrestaShop", "Java"], aprendido: "Desarrollo de software a la medida, interfaces de usuario y lógica de negocios." },
+      { id: 2, nombre: "Módulo 2 — Componentes móviles", profesor: "Arcides Canales", resumen: "Creación de componentes y apps móviles, integrando interfaces y lógica para dispositivos.", herramientas: ["Visual Studio", ".NET MAUI", "Windows Forms"], aprendido: "Creación de apps para celulares y adaptación de interfaces a dispositivos móviles." },
+      { id: 3, nombre: "Módulo 3 — Inglés técnico", profesor: "Arcides Canales", resumen: "Práctica de conversación en inglés técnico aplicada al mantenimiento de sistemas informáticos.", herramientas: ["Inglés técnico", "Vocabulario", "Role-play"], aprendido: "Comunicación oral y escrita en inglés enfocada a soporte técnico y sistemas." },
+      { id: 4, nombre: "Módulo 4 — Empresa cooperativa", profesor: "Arcides Canales", resumen: "Emprendimiento y constitución de una empresa bajo modelo cooperativo: plan, organización y puesta en marcha.", herramientas: ["Plan de negocio", "Documentos", "Presentaciones"], aprendido: "Cómo crear y organizar una cooperativa, planes de negocio y trabajo en equipo." },
+      { id: 5, nombre: "Módulo 3.8 — Proyecto innovador", profesor: "Javier Mineros", resumen: "Diseño y desarrollo de un proyecto innovador de software aplicando todo lo aprendido en el año.", herramientas: ["VS Code", "Python", "PHP", "IA"], aprendido: "Gestión de proyectos reales, innovación y uso de IA como apoyo al desarrollo." },
+      { id: 6, nombre: "Módulo 3.4 — Documentación técnica", profesor: "Javier Mineros", resumen: "Documentación técnica de sistemas: manuales, diagramas, especificaciones y estándares.", herramientas: ["VS Code", "Markdown", "IA"], aprendido: "Redacción de manuales, diagramas de flujo y documentación de sistemas." },
+      { id: 7, nombre: "Módulo 3.3 — Bases de Datos", profesor: "Javier Mineros", resumen: "Diseño, creación y administración de bases de datos relacionales con XAMPP y PHP.", herramientas: ["XAMPP", "MySQL", "PHP", "phpMyAdmin"], aprendido: "Modelado de datos, consultas SQL y administración de bases de datos MySQL." },
+      { id: 8, nombre: "Módulo 3.2 — Mantenimiento de sistemas", profesor: "Javier Mineros", resumen: "Mantenimiento preventivo y correctivo, respaldo y aseguramiento de la operación de sistemas.", herramientas: ["Avalonia", "Python", "XAMPP", "VS Code"], aprendido: "Diagnóstico de fallas, mantenimiento de software y respaldo de información." }
     ];
 
+    // ==== 15 PREGUNTAS DEL QUIZ ====
     const preguntas = [
       { pregunta: "¿Cuál es el nombre de este portal?", opciones: ["HUB 3DS·B", "Portal Web", "Sistema INDEL", "Repaso Anual"], correcta: 0, explicacion: "¡Correcto! El portal se llama HUB 3DS·B." },
-      { pregunta: "¿Cuántos módulos se muestran en el Mapa del año?", opciones: ["5 módulos", "8 módulos", "10 módulos", "4 módulos"], correcta: 1, explicacion: "¡Exacto! En la página se muestran 8 módulos en total." },
+      { pregunta: "¿Cuántos módulos se muestran en el Mapa del año ahora?", opciones: ["5 módulos", "8 módulos", "9 módulos", "10 módulos"], correcta: 2, explicacion: "¡Exacto! Ahora hay 9 módulos con el nuevo de Orientación." },
       { pregunta: "¿Qué herramienta se usa para administrar bases de datos?", opciones: ["Windows Forms", "PHP", "XAMPP", "Avalonia"], correcta: 2, explicacion: "¡Bien! XAMPP se usa en el Módulo 3.3 de Bases de Datos." },
       { pregunta: "¿Qué lenguaje se agregó a las herramientas del Módulo 3.1?", opciones: ["Python", "Java", "C#", "PHP"], correcta: 1, explicacion: "¡Así es! Java fue agregado al Módulo 3.1." },
-      { pregunta: "¿Dónde se guarda tu progreso de repaso?", opciones: ["En una base de datos", "En el navegador", "En un archivo de texto", "Se pierde al cerrar"], correcta: 1, explicacion: "¡Correcto! El progreso se guarda en el navegador con localStorage." }
+      { pregunta: "¿Dónde se guarda tu progreso de repaso?", opciones: ["En una base de datos", "En el navegador", "En un archivo de texto", "Se pierde al cerrar"], correcta: 1, explicacion: "¡Correcto! El progreso se guarda en el navegador con localStorage." },
+      { pregunta: "¿Quién imparte el nuevo Módulo 3.0?", opciones: ["Arcides Canales", "Javier Mineros", "El director", "Un alumno"], correcta: 1, explicacion: "¡Bien! Javier Mineros imparte el Módulo 3.0." },
+      { pregunta: "¿Qué herramienta se usa para apps móviles?", opciones: [".NET MAUI", "PHP", "MySQL", "Markdown"], correcta: 0, explicacion: "¡Exacto! .NET MAUI se usa para apps móviles." },
+      { pregunta: "¿En qué módulo se aprende inglés técnico?", opciones: ["Módulo 1", "Módulo 3", "Módulo 4", "Módulo 5"], correcta: 1, explicacion: "¡Correcto! Es el Módulo 3." },
+      { pregunta: "¿Qué se hace en el Módulo 4?", opciones: ["Programar en Java", "Crear una cooperativa", "Administrar bases de datos", "Documentar sistemas"], correcta: 1, explicacion: "¡Así es! Se crea una empresa cooperativa." },
+      { pregunta: "¿Qué herramienta se usa en el Módulo 3.4?", opciones: ["XAMPP", "VS Code", "Avalonia", "PrestaShop"], correcta: 1, explicacion: "¡Bien! VS Code se usa para documentación." },
+      { pregunta: "¿Qué lenguaje se usa en el Módulo 3.8?", opciones: ["Java", "Python", "C#", "ASPX"], correcta: 1, explicacion: "¡Correcto! Se usa Python entre otras herramientas." },
+      { pregunta: "¿Qué significa la 'IA' en las herramientas?", opciones: ["Internet Avanzado", "Inteligencia Artificial", "Interfaz de Aplicación", "Ingeniería Automática"], correcta: 1, explicacion: "¡Exacto! IA significa Inteligencia Artificial." },
+      { pregunta: "¿Qué formato deben tener los commits?", opciones: ["tipo: descripción", "descripción: tipo", "solo texto", "número"], correcta: 0, explicacion: "¡Bien! El formato es 'tipo: descripción'." },
+      { pregunta: "¿Qué comando se usa antes de subir cambios?", opciones: ["git push", "git pull", "git init", "git add"], correcta: 1, explicacion: "¡Correcto! git pull evita conflictos." },
+      { pregunta: "¿Qué insignia se desbloquea al completar todos los módulos?", opciones: ["Maestro del repaso", "Novato", "Explorador", "Aprendiz"], correcta: 0, explicacion: "¡Exacto! La insignia final es 'Maestro del repaso'." }
     ];
 
+    // ==== DATOS DE FLASHCARDS ====
+    const flashcardsData = [
+      { pregunta: "¿De qué trata el Módulo 3.0?", respuesta: "De la orientación de estudiantes al proceso educativo del tercer año." },
+      { pregunta: "¿Qué es .NET MAUI?", respuesta: "Framework para crear apps multiplataforma (móviles y escritorio)." },
+      { pregunta: "¿Para qué sirve XAMPP?", respuesta: "Para administrar bases de datos MySQL y servidores PHP locales." },
+      { pregunta: "¿Qué es un commit?", respuesta: "Un registro de cambios en Git con un mensaje descriptivo." },
+      { pregunta: "¿Qué es una cooperativa?", respuesta: "Una empresa propiedad de sus trabajadores, con gestión democrática." },
+      { pregunta: "¿Qué es VS Code?", respuesta: "Editor de código ligero y potente para múltiples lenguajes." },
+      { pregunta: "¿Qué es Markdown?", respuesta: "Lenguaje de marcado ligero para documentación." }
+    ];
+
+    // ==== DATOS DE LÍNEA DE TIEMPO ====
+    const timelineData = [
+      { titulo: "Inicio del año", desc: "Conocemos a los profesores y los módulos que cursaremos." },
+      { titulo: "Orientación inicial", desc: "Nos orientan sobre el proceso educativo del tercer año." },
+      { titulo: "Primeros pasos en programación", desc: "Aprendemos lo básico de Visual Studio y Windows Forms." },
+      { titulo: "Apps móviles", desc: "Descubrimos .NET MAUI y creamos nuestras primeras apps." },
+      { titulo: "Bases de datos", desc: "Diseñamos y administramos bases de datos con XAMPP." },
+      { titulo: "Documentación técnica", desc: "Aprendemos a documentar sistemas y escribir manuales." },
+      { titulo: "Proyecto innovador", desc: "Desarrollamos un proyecto integrando todo lo aprendido." },
+      { titulo: "Cierre del año", desc: "Presentamos proyectos y repasamos lo aprendido." }
+    ];
+
+    // ==== DATOS DE LOGROS ====
+    const logrosData = [
+      { id: "primer", nombre: "Primer paso", desc: "Completa 1 módulo", icono: "🚀", requerido: 1 },
+      { id: "tres", nombre: "Explorador", desc: "Completa 3 módulos", icono: "🧭", requerido: 3 },
+      { id: "cinco", nombre: "Avanzado", desc: "Completa 5 módulos", icono: "⚡", requerido: 5 },
+      { id: "siete", nombre: "Casi experto", desc: "Completa 7 módulos", icono: "🔥", requerido: 7 },
+      { id: "todos", nombre: "Maestro del repaso", desc: "Completa todos los módulos (9)", icono: "👑", requerido: 9 }
+    ];
+
+    // ==== REFERENCIAS ====
     const lista = document.getElementById("listaModulos");
     const container = document.getElementById("carouselContainer");
     const searchInput = document.getElementById("searchInput");
@@ -770,8 +863,6 @@ git push -u origin main
     const quizFeedback = document.getElementById("quizFeedback");
     const btnSiguiente = document.getElementById("btnSiguiente");
     const quizScore = document.getElementById("quizScore");
-    
-    // Nuevas referencias para la vista de lista
     const vistaLista = document.getElementById("vistaLista");
     const cuerpoTabla = document.getElementById("cuerpoTabla");
     const btnVistaCarrusel = document.getElementById("btnVistaCarrusel");
@@ -786,6 +877,7 @@ git push -u origin main
       const completados = modulos.filter(m => progreso[m.id]).length;
       progressBar.style.width = (completados / total) * 100 + "%";
       progresoTexto.textContent = `${completados} / ${total}`;
+      actualizarLogros(completados);
     }
 
     function llenarSelect() {
@@ -797,7 +889,102 @@ git push -u origin main
       });
     }
 
-    // ==== NUEVA FUNCIÓN PARA CAMBIAR VISTA ====
+    // ==== FLASHCARDS ====
+    function renderizarFlashcards() {
+      const grid = document.getElementById("flashcardsGrid");
+      grid.innerHTML = "";
+      flashcardsData.forEach(fc => {
+        const div = document.createElement("div");
+        div.className = "flashcard";
+        div.innerHTML = `
+          <div class="flashcard-inner">
+            <div class="flashcard-front">
+              <h4>${fc.pregunta}</h4>
+              <p>(Haz clic para ver la respuesta)</p>
+            </div>
+            <div class="flashcard-back">
+              <p>${fc.respuesta}</p>
+            </div>
+          </div>
+        `;
+        div.onclick = () => div.classList.toggle("flipped");
+        grid.appendChild(div);
+      });
+    }
+
+    // ==== LÍNEA DE TIEMPO ====
+    function renderizarTimeline() {
+      const container = document.getElementById("timelineContainer");
+      container.innerHTML = "";
+      timelineData.forEach((item, i) => {
+        const div = document.createElement("div");
+        div.className = "timeline-item";
+        div.style.animationDelay = (i * 0.15) + "s";
+        div.innerHTML = `
+          <div class="timeline-content">
+            <h4>${item.titulo}</h4>
+            <p>${item.desc}</p>
+          </div>
+        `;
+        container.appendChild(div);
+      });
+      
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) entry.target.classList.add("visible");
+        });
+      }, { threshold: 0.1 });
+      document.querySelectorAll(".timeline-item").forEach(item => observer.observe(item));
+    }
+
+    // ==== NUBE DE TECNOLOGÍAS ====
+    let tecnologiaActiva = null;
+    function renderizarTechCloud() {
+      const cloud = document.getElementById("techCloud");
+      cloud.innerHTML = "";
+      const todas = new Set();
+      modulos.forEach(m => m.herramientas.forEach(h => todas.add(h)));
+      
+      todas.forEach(tec => {
+        const span = document.createElement("span");
+        span.className = "tech-tag";
+        span.textContent = tec;
+        if (tecnologiaActiva === tec) span.classList.add("activo");
+        span.onclick = () => {
+          if (tecnologiaActiva === tec) {
+            tecnologiaActiva = null;
+            searchInput.value = "";
+          } else {
+            tecnologiaActiva = tec;
+            searchInput.value = tec;
+          }
+          renderizarTechCloud();
+          renderizarTarjetas();
+          renderizarTabla();
+          document.getElementById("modulos").scrollIntoView({ behavior: 'smooth' });
+        };
+        cloud.appendChild(span);
+      });
+    }
+
+    // ==== LOGROS ====
+    function actualizarLogros(completados) {
+      const grid = document.getElementById("logrosGrid");
+      grid.innerHTML = "";
+      logrosData.forEach(logro => {
+        const desbloqueado = completados >= logro.requerido;
+        const div = document.createElement("div");
+        div.className = "logro" + (desbloqueado ? " desbloqueado" : "");
+        div.innerHTML = `
+          <div class="logro-icono">${logro.icono}</div>
+          <div class="logro-nombre">${logro.nombre}</div>
+          <div class="logro-desc">${logro.desc}</div>
+        `;
+        grid.appendChild(div);
+      });
+    }
+
+    // ==== VISTAS ====
     function cambiarVista(vista) {
       if (vista === 'carrusel') {
         container.style.display = 'block';
@@ -814,7 +1001,6 @@ git push -u origin main
       }
     }
 
-    // ==== RENDERIZAR TABLA (VISTA LISTA) ====
     function renderizarTabla() {
       cuerpoTabla.innerHTML = "";
       const query = searchInput.value.toLowerCase().trim();
@@ -830,7 +1016,7 @@ git push -u origin main
       });
 
       if (filtrados.length === 0) {
-        cuerpoTabla.innerHTML = "<tr><td colspan='4' style='text-align:center; color:var(--muted);'>No se encontraron módulos con esos filtros.</td></tr>";
+        cuerpoTabla.innerHTML = "<tr><td colspan='4' style='text-align:center; color:var(--muted);'>No se encontraron módulos.</td></tr>";
         return;
       }
 
@@ -884,8 +1070,6 @@ git push -u origin main
         `;
         lista.appendChild(card);
       });
-      
-      // También actualizamos la tabla por si acaso
       renderizarTabla();
     }
 
@@ -922,33 +1106,24 @@ git push -u origin main
       if (container.style.display !== 'none') iniciarAutoScroll();
     });
 
-    searchInput.addEventListener("input", () => {
-      renderizarTarjetas();
-      renderizarTabla();
-    });
-    filtroProfesor.addEventListener("change", () => {
-      renderizarTarjetas();
-      renderizarTabla();
-    });
-    filtroEstado.addEventListener("change", () => {
-      renderizarTarjetas();
-      renderizarTabla();
-    });
+    searchInput.addEventListener("input", () => { renderizarTarjetas(); renderizarTabla(); });
+    filtroProfesor.addEventListener("change", () => { renderizarTarjetas(); renderizarTabla(); });
+    filtroEstado.addEventListener("change", () => { renderizarTarjetas(); renderizarTabla(); });
 
     selectModulo.addEventListener("change", (e) => {
       const index = e.target.value;
       if (index === "") {
         detenerAutoScroll();
         lista.scrollTo({ left: 0, behavior: 'smooth' });
-        setTimeout(() => {
-          if (container.style.display !== 'none') iniciarAutoScroll();
-        }, 1000); 
+        setTimeout(() => { if (container.style.display !== 'none') iniciarAutoScroll(); }, 1000); 
         return;
       }
       detenerAutoScroll();
       searchInput.value = "";
       filtroProfesor.value = "";
       filtroEstado.value = "";
+      tecnologiaActiva = null;
+      renderizarTechCloud();
       renderizarTarjetas();
 
       const targetCard = document.getElementById(`card-${index}`);
@@ -964,7 +1139,7 @@ git push -u origin main
       }
     });
 
-    // Lógica del Quiz
+    // ==== QUIZ ====
     let indicePregunta = 0, puntaje = 0, respondida = false;
 
     function cargarPregunta() {
@@ -1014,7 +1189,7 @@ git push -u origin main
         indicePregunta++;
         cargarPregunta();
       } else {
-        quizPregunta.textContent = "🎉 ¡Quiz completado!";
+        quizPregunta.textContent = "¡Quiz completado!";
         quizOpciones.innerHTML = "";
         quizFeedback.className = "quiz-feedback correcta";
         quizFeedback.textContent = `Obtuviste ${puntaje} de ${preguntas.length} respuestas correctas. ${puntaje === preguntas.length ? '¡Eres un experto!' : '¡Sigue repasando!'}`;
@@ -1023,12 +1198,16 @@ git push -u origin main
       }
     });
 
-    // Inicializar
+    // ==== INICIALIZAR ====
     llenarSelect();
     renderizarTarjetas();
     actualizarBarraProgreso();
     cargarPregunta();
     iniciarAutoScroll();
+    renderizarFlashcards();
+    renderizarTimeline();
+    renderizarTechCloud();
+    actualizarLogros(0);
   </script>
 </body>
 </html>
